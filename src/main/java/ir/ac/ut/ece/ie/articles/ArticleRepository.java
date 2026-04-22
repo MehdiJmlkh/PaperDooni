@@ -3,6 +3,7 @@ package ir.ac.ut.ece.ie.articles;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -16,16 +17,30 @@ import java.util.Optional;
 public class ArticleRepository {
     private final List<Article> articles = new ArrayList<>();
     private Long lastGeneratedId = 0L;
+    private final ArticleMapper articleMapper;
 
 
-    public ArticleRepository() {
+    public ArticleRepository(ArticleMapper articleMapper) {
+        this.articleMapper = articleMapper;
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            mapper.readValue(
+            var articleDtoList = mapper.readValue(
                     new File("./src/main/resources/sampleArticles.json"),
-                    new TypeReference<List<Article>>() {}
-            ).forEach(this::addArticle);
+                    new TypeReference<List<ArticleJsonDto>>() {}
+            );
+
+            articleDtoList.stream()
+                    .map(articleMapper::toEntity)
+                    .forEach(this::addArticle);
+
+            for (ArticleJsonDto articleJsonDto : articleDtoList) {
+                var article = findByTitle(articleJsonDto.getTitle()).orElseThrow();
+                var citations = articles.stream()
+                        .filter(a -> articleJsonDto.getCitations().contains(a.getId()))
+                        .toList();
+                article.setCitations(citations);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,6 +59,12 @@ public class ArticleRepository {
     public Optional<Article> findById(Long id) {
         return articles.stream()
                 .filter(article -> article.getId().equals(id))
+                .findFirst();
+    }
+
+    public Optional<Article> findByTitle(String title) {
+        return articles.stream()
+                .filter(article -> article.getTitle().equals(title))
                 .findFirst();
     }
 }

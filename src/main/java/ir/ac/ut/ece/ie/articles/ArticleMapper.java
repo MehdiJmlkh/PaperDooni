@@ -23,7 +23,29 @@ public class ArticleMapper {
         articleDto.setBody(article.getBody());
         articleDto.setYear(article.getYear());
         articleDto.setAbs(article.getAbs());
-
+        var citations = article.getCitations().stream()
+                .map(this::toCitationDto)
+                .toList();
+        articleDto.setCitations(citations);
         return articleDto;
+    }
+
+    public Article toEntity(ArticleJsonDto articleJsonDto) {
+        var article = new Article();
+        article.setTitle(articleJsonDto.getTitle());
+        article.setAbs(articleJsonDto.getAbs());
+        article.setBody(articleJsonDto.getBody());
+        article.setYear(articleJsonDto.getYear());
+
+        return  article;
+    }
+
+    public CitationDto toCitationDto(Article article) {
+        var citationDto = new CitationDto();
+
+        citationDto.setId(article.getId());
+        citationDto.setTitle(article.getTitle());
+
+        return citationDto;
     }
 }
