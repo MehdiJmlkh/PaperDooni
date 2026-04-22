@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ArticleMapper {
-    public ArticleSummaryDto toDto(Article article) {
+    public ArticleSummaryDto toSummaryDto(Article article) {
         var articleDto = new ArticleSummaryDto();
 
         articleDto.setId(article.getId());
@@ -12,6 +12,17 @@ public class ArticleMapper {
         articleDto.setAbs(article.getAbs());
         articleDto.setYear(article.getYear());
         articleDto.setCitedBy(article.getCitations().size());
+
+        return articleDto;
+    }
+
+    public ArticleDto toDto(Article article) {
+        var articleDto = new ArticleDto();
+        articleDto.setId(article.getId());
+        articleDto.setTitle(article.getTitle());
+        articleDto.setBody(article.getBody());
+        articleDto.setYear(article.getYear());
+        articleDto.setAbs(article.getAbs());
 
         return articleDto;
     }

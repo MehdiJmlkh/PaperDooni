@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Repository
 public class ArticleRepository {
@@ -38,5 +39,11 @@ public class ArticleRepository {
 
     public List<Article> getAll() {
         return articles;
+    }
+
+    public Optional<Article> findById(Long id) {
+        return articles.stream()
+                .filter(article -> article.getId().equals(id))
+                .findFirst();
     }
 }
