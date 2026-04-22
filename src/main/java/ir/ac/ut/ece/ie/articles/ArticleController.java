@@ -14,7 +14,7 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping
-    public List<ArticleDto> getAllArticles() {
+    public List<ArticleSummaryDto> getAllArticles() {
         return articleService.getAllArticles();
     }
 }

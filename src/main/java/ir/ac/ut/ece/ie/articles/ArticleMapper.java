@@ -4,9 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ArticleMapper {
-    public ArticleDto toDto(Article article) {
-        var articleDto = new ArticleDto();
+    public ArticleSummaryDto toDto(Article article) {
+        var articleDto = new ArticleSummaryDto();
 
+        articleDto.setId(article.getId());
         articleDto.setTitle(article.getTitle());
         articleDto.setAbs(article.getAbs());
         articleDto.setYear(article.getYear());

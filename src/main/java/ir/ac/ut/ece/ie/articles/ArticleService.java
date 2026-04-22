@@ -11,7 +11,7 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public List<ArticleDto> getAllArticles() {
+    public List<ArticleSummaryDto> getAllArticles() {
             return articleRepository.getAll().stream()
                     .map(articleMapper::toDto)
                     .toList();
