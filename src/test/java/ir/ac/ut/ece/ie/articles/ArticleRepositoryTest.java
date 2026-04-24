@@ -51,6 +51,7 @@ public class ArticleRepositoryTest {
         article1.addCitation(article3);
         article2.addCitation(article2);
 
+        articleRepository = new ArticleRepository();
         articleRepository.addArticle(article1);
         articleRepository.addArticle(article2);
         articleRepository.addArticle(article3);
