@@ -14,4 +14,9 @@ public class Article {
     private int year;
     private List<Article> citations = new ArrayList<>();
     private List<Article> citedBy = new ArrayList<>();
+
+    public void addCitation(Article article) {
+        citations.add(article);
+        article.citedBy.add(this);
+    }
 }

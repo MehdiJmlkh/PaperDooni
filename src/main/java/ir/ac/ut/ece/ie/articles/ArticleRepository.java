@@ -2,15 +2,12 @@ package ir.ac.ut.ece.ie.articles;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Repository
@@ -36,11 +33,9 @@ public class ArticleRepository {
 
             for (ArticleJsonDto articleJsonDto : articleDtoList) {
                 var article = findByTitle(articleJsonDto.getTitle()).orElseThrow();
-                var citations = articles.stream()
+                articles.stream()
                         .filter(a -> articleJsonDto.getCitations().contains(a.getId()))
-                        .toList();
-                citations.forEach(citation -> citation.getCitedBy().add(article));
-                article.setCitations(citations);
+                        .forEach(article::addCitation);
             }
 
         } catch (IOException e) {

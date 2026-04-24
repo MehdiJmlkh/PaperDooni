@@ -26,13 +26,12 @@ public class ArticleService {
 
     public ArticleDto addArticle(AddArticleRequest request) {
         var article = articleMapper.toEntity(request);
-        var citations = request.getCitations().stream()
-                .map(articleRepository::findById)
-                .map(a -> a.orElseThrow(CitationNotFoundException::new))
-                .toList();
 
-        citations.forEach(citation -> citation.getCitedBy().add(article));
-        article.setCitations(citations);
+        request.getCitations().stream()
+                .map(id -> articleRepository.findById(id)
+                                .orElseThrow(CitationNotFoundException::new))
+                .forEach(article::addCitation);
+
         articleRepository.addArticle(article);
 
         return articleMapper.toDto(article);
