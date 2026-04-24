@@ -23,4 +23,15 @@ public class ArticleService {
 
         return articleMapper.toDto(article);
     }
+
+    public void addArticle(AddArticleRequest request) {
+        var article = articleMapper.toEntity(request);
+        var citations = request.getCitations().stream()
+                .map(articleRepository::findById)
+                .map(a -> a.orElseThrow(CitationNotFoundException::new))
+                .toList();
+
+        article.setCitations(citations);
+        articleRepository.addArticle(article);
+    }
 }

@@ -23,9 +23,20 @@ public class ArticleController {
         return articleService.getArticle(id);
     }
 
+    @PostMapping
+    public void addArticle(@RequestBody AddArticleRequest request) {
+        articleService.addArticle(request);
+    }
+
     @ExceptionHandler(ArticleNotFoundException.class)
     public ResponseEntity<ErrorDto> handleArticleNotFoundException() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorDto("There is no article with this title."));
+    }
+
+    @ExceptionHandler(CitationNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleCitationNotFoundException() {
+        return ResponseEntity.badRequest()
+                .body(new ErrorDto("Citation ID(s) not found."));
     }
 }

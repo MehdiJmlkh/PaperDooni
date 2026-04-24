@@ -40,6 +40,16 @@ public class ArticleMapper {
         return  article;
     }
 
+    public Article toEntity(AddArticleRequest request) {
+        var article = new Article();
+        article.setTitle(request.getTitle());
+        article.setAbs(request.getAbs());
+        article.setBody(request.getBody());
+        article.setYear(request.getYear());
+
+        return  article;
+    }
+
     public CitationDto toCitationDto(Article article) {
         var citationDto = new CitationDto();
 
