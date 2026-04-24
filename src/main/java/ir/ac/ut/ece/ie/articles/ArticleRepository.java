@@ -39,6 +39,7 @@ public class ArticleRepository {
                 var citations = articles.stream()
                         .filter(a -> articleJsonDto.getCitations().contains(a.getId()))
                         .toList();
+                citations.forEach(citation -> citation.getCitedBy().add(article));
                 article.setCitations(citations);
             }
 

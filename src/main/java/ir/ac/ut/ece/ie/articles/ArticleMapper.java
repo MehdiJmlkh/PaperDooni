@@ -11,7 +11,7 @@ public class ArticleMapper {
         articleDto.setTitle(article.getTitle());
         articleDto.setAbs(article.getAbs());
         articleDto.setYear(article.getYear());
-        articleDto.setCitedBy(article.getCitations().size());
+        articleDto.setCitedBy(article.getCitedBy().size());
 
         return articleDto;
     }
