@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -24,8 +25,13 @@ public class ArticleController {
     }
 
     @PostMapping
-    public void addArticle(@RequestBody AddArticleRequest request) {
-        articleService.addArticle(request);
+    public ResponseEntity<ArticleDto> addArticle(
+            @RequestBody AddArticleRequest request,
+            UriComponentsBuilder uriBuilder
+    ) {
+        var articleDto = articleService.addArticle(request);
+        var uri = uriBuilder.path("/articles/{id}").buildAndExpand(articleDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(articleDto);
     }
 
     @ExceptionHandler(ArticleNotFoundException.class)

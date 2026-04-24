@@ -24,7 +24,7 @@ public class ArticleService {
         return articleMapper.toDto(article);
     }
 
-    public void addArticle(AddArticleRequest request) {
+    public ArticleDto addArticle(AddArticleRequest request) {
         var article = articleMapper.toEntity(request);
         var citations = request.getCitations().stream()
                 .map(articleRepository::findById)
@@ -33,5 +33,7 @@ public class ArticleService {
 
         article.setCitations(citations);
         articleRepository.addArticle(article);
+
+        return articleMapper.toDto(article);
     }
 }
