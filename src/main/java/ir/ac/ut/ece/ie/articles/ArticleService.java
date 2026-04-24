@@ -31,6 +31,7 @@ public class ArticleService {
                 .map(a -> a.orElseThrow(CitationNotFoundException::new))
                 .toList();
 
+        citations.forEach(citation -> citation.getCitedBy().add(article));
         article.setCitations(citations);
         articleRepository.addArticle(article);
 
