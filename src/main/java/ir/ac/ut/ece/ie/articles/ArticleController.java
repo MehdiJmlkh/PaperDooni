@@ -38,7 +38,7 @@ public class ArticleController {
     @ExceptionHandler(ArticleNotFoundException.class)
     public ResponseEntity<ErrorDto> handleArticleNotFoundException() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(new ErrorDto("There is no article with this title."));
+                .body(new ErrorDto("There is no article with this id."));
     }
 
     @ExceptionHandler(CitationNotFoundException.class)
