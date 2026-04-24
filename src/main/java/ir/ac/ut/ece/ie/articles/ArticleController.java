@@ -35,10 +35,12 @@ public class ArticleController {
             UriComponentsBuilder uriBuilder
     ) {
         var articleDto = articleService.addArticle(request);
-        articleDto.getCitations().forEach(citationDto ->
-                citationDto.setLocation(uriBuilder.cloneBuilder(), "/articles/{id}"));
 
-        var uri = uriBuilder.path("/articles/{id}").buildAndExpand(articleDto.getId()).toUri();
+        String articlePath = "/articles/{id}";
+        articleDto.getCitations().forEach(citationDto ->
+                citationDto.setLocation(uriBuilder.cloneBuilder(), articlePath));
+
+        var uri = uriBuilder.path(articlePath).buildAndExpand(articleDto.getId()).toUri();
         return ResponseEntity.created(uri).body(articleDto);
     }
 
