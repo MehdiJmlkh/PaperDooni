@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Article {
+public class Article implements Comparable<Article> {
     private Long id;
     private String title;
     private String abs;
@@ -18,5 +18,13 @@ public class Article {
     public void addCitation(Article article) {
         citations.add(article);
         article.citedBy.add(this);
+    }
+
+    @Override
+    public int compareTo(Article other) {
+        if (citedBy.size() != other.citedBy.size()) {
+            return citedBy.size() - other.citedBy.size();
+        }
+        return year - other.getYear();
     }
 }
