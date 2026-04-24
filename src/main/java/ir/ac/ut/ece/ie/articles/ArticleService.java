@@ -25,6 +25,9 @@ public class ArticleService {
     }
 
     public ArticleDto addArticle(AddArticleRequest request) {
+        articleRepository.findByTitle(request.getTitle())
+                .ifPresent(a -> { throw new TitleAlreadyExistsException(); });
+
         var article = articleMapper.toEntity(request);
 
         request.getCitations().stream()

@@ -45,4 +45,10 @@ public class ArticleController {
         return ResponseEntity.badRequest()
                 .body(new ErrorDto("Citation ID(s) not found."));
     }
+
+    @ExceptionHandler(TitleAlreadyExistsException.class)
+    public ResponseEntity<ErrorDto> handleTitleAlreadyExistsException() {
+        return ResponseEntity.badRequest()
+                .body(new ErrorDto("An article with this title already exists."));
+    }
 }
