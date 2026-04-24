@@ -77,4 +77,38 @@ public class ArticleServiceTest {
 
         assertEquals(request.getTitle(), article.getTitle());
     }
+
+    @Test
+    void getArticle_articleNotFound_throwsException() {
+        assertThrows(ArticleNotFoundException.class, () -> articleService.getArticle(1L));
+    }
+
+    @Test
+    void getArticle_validInput_returnsArticleDto() {
+        var citation1 = Article.builder().title("citation1").id(2L).build();
+        var citation2 = Article.builder().title("citation2").id(3L).build();
+
+        var article = Article.builder().id(1L).title("title").abs("abs").body("body")
+                .year(2026).citations(List.of(citation1, citation2)).build();
+
+        when(articleRepository.findById(1L)).thenReturn(Optional.of(article));
+
+        var articleDto = articleService.getArticle(1L);
+
+        assertEquals(article.getId(), articleDto.getId());
+        assertEquals(article.getTitle(), articleDto.getTitle());
+        assertEquals(article.getAbs(), articleDto.getAbs());
+        assertEquals(article.getBody(), articleDto.getBody());
+        assertEquals(article.getYear(), articleDto.getYear());
+        assertEquals(article.getCitations().size(), articleDto.getCitations().size());
+
+        var citationDto1 = articleDto.getCitations().get(0);
+        var citationDto2 = articleDto.getCitations().get(1);
+
+        assertEquals(citation1.getId(), citationDto1.getId());
+        assertEquals(citation1.getTitle(), citationDto1.getTitle());
+
+        assertEquals(citation2.getId(), citationDto2.getId());
+        assertEquals(citation2.getTitle(), citationDto2.getTitle());
+    }
 }
