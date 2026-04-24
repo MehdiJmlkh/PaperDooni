@@ -21,8 +21,12 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ArticleDto getArticle(@PathVariable("id") Long id) {
-        return articleService.getArticle(id);
+    public ArticleDto getArticle(@PathVariable("id") Long id,
+                                 UriComponentsBuilder uriBuilder) {
+        var articleDto = articleService.getArticle(id);
+        articleDto.getCitations().forEach(citation ->
+                        citation.setLocation(uriBuilder.cloneBuilder(), "/articles/{id}"));
+        return articleDto;
     }
 
     @PostMapping
@@ -31,6 +35,9 @@ public class ArticleController {
             UriComponentsBuilder uriBuilder
     ) {
         var articleDto = articleService.addArticle(request);
+        articleDto.getCitations().forEach(citationDto ->
+                citationDto.setLocation(uriBuilder.cloneBuilder(), "/articles/{id}"));
+
         var uri = uriBuilder.path("/articles/{id}").buildAndExpand(articleDto.getId()).toUri();
         return ResponseEntity.created(uri).body(articleDto);
     }
