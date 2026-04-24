@@ -1,11 +1,16 @@
 package ir.ac.ut.ece.ie.articles;
 
-import lombok.Data;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Article implements Comparable<Article> {
     private Long id;
     private String title;
