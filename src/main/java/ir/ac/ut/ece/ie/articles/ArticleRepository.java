@@ -14,34 +14,6 @@ import java.util.Optional;
 public class ArticleRepository {
     private final List<Article> articles = new ArrayList<>();
     private Long lastGeneratedId = 0L;
-//    private final ArticleMapper articleMapper;
-
-
-//    public ArticleRepository(ArticleMapper articleMapper) {
-//        this.articleMapper = articleMapper;
-//        try {
-//            ObjectMapper mapper = new ObjectMapper();
-//
-//            var articleDtoList = mapper.readValue(
-//                    new File("./src/main/resources/sampleArticles.json"),
-//                    new TypeReference<List<ArticleJsonDto>>() {}
-//            );
-//
-//            articleDtoList.stream()
-//                    .map(articleMapper::toEntity)
-//                    .forEach(this::addArticle);
-//
-//            for (ArticleJsonDto articleJsonDto : articleDtoList) {
-//                var article = findByTitle(articleJsonDto.getTitle()).orElseThrow();
-//                articles.stream()
-//                        .filter(a -> articleJsonDto.getCitations().contains(a.getId()))
-//                        .forEach(article::addCitation);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void addArticle(Article article) {
         article.setId(++lastGeneratedId);
