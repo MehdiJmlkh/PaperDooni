@@ -20,6 +20,14 @@ public class Article implements Comparable<Article> {
         article.citedBy.add(this);
     }
 
+    public boolean titleContains(String searchText) {
+        return title.toLowerCase().contains(searchText);
+    }
+
+    public boolean absContains(String searchText) {
+        return abs.toLowerCase().contains(searchText);
+    }
+
     @Override
     public int compareTo(Article other) {
         if (citedBy.size() != other.citedBy.size()) {

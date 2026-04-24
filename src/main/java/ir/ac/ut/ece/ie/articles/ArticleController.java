@@ -15,8 +15,9 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping
-    public List<ArticleSummaryDto> getAllArticles() {
-        return articleService.getAllArticles();
+    public List<ArticleSummaryDto> getArticles(
+            @RequestParam(value = "searchText", required = false, defaultValue = "") String searchText) {
+        return articleService.getArticles(searchText);
     }
 
     @GetMapping("/{id}")

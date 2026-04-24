@@ -63,4 +63,24 @@ public class ArticleRepository {
                 .filter(article -> article.getTitle().equals(title))
                 .findFirst();
     }
+
+    public List<Article> containsSearchText(String searchText) {
+        return articles
+                .stream()
+                .filter(article ->
+                        article.titleContains(searchText) || article.absContains(searchText))
+                .sorted((a, b) -> {
+                    boolean aTitleContainsSearchText = a.titleContains(searchText);
+                    boolean bTitleContainsSearchText = b.titleContains(searchText);
+
+                    if (aTitleContainsSearchText && !bTitleContainsSearchText) {
+                        return -1;
+                    }
+                    else if (!aTitleContainsSearchText && bTitleContainsSearchText) {
+                        return 1;
+                    }
+                    return b.compareTo(a);
+                })
+                .toList();
+    }
 }

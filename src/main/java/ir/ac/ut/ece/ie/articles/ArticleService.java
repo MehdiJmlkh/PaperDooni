@@ -3,7 +3,6 @@ package ir.ac.ut.ece.ie.articles;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 
 @AllArgsConstructor
@@ -12,11 +11,10 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public List<ArticleSummaryDto> getAllArticles() {
-            return articleRepository.getAll().stream()
-                    .sorted(Comparator.reverseOrder())
-                    .map(articleMapper::toSummaryDto)
-                    .toList();
+    public List<ArticleSummaryDto> getArticles(String searchText) {
+        return articleRepository.containsSearchText(searchText).stream()
+                .map(articleMapper::toSummaryDto)
+                .toList();
     }
 
     public ArticleDto getArticle(Long id) {
