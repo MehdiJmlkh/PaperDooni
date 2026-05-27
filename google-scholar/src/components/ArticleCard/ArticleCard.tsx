@@ -1,13 +1,15 @@
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
+import { MdOutlineArticle } from "react-icons/md";
 
 const ArticleCard = () => {
   return (
     <div className="article">
-      <a className="article__title">
-        Title
-      </a>
-      <CitationBadge>2</CitationBadge>
+      <div className="article__header">
+        <MdOutlineArticle className="article__icon" size={30} />
+        <a className="article__title">Title</a>
+        <CitationBadge>2</CitationBadge>
+      </div>
       <div className="article__year">2026</div>
       <p className="article__abstract">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
