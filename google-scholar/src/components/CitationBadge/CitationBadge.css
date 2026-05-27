@@ -1,0 +1,7 @@
+.citation-badge {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 5px;
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
