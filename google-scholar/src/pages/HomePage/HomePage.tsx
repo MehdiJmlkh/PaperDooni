@@ -1,8 +1,15 @@
+import ArticleCard from '../../components/ArticleCard'
 import './HomePage.css'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <main className='home-page'>
+        <ArticleCard />
+        <ArticleCard />
+        <ArticleCard />
+        <ArticleCard />
+        <ArticleCard />
+    </main>
   )
 }
 
