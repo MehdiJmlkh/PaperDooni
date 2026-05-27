@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 
 const Layout = () => {
   return (
-    <body>
+    <body className="page-container">
       <Header />
       <Outlet />
       <Footer />
