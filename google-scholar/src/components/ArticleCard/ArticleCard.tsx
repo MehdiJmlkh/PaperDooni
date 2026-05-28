@@ -1,10 +1,11 @@
+import Card from "../Card";
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
 import { MdOutlineArticle } from "react-icons/md";
 
 const ArticleCard = () => {
   return (
-    <div className="article">
+    <Card className="article">
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={30} />
         <a className="article__title">Title</a>
@@ -21,7 +22,7 @@ const ArticleCard = () => {
         ducimus quae quas beatae voluptatum. Placeat suscipit sapiente voluptas
         labore iure consectetur mollitia consequatur ab at et dolorum, ullam
       </p>
-    </div>
+    </Card>
   );
 };
 

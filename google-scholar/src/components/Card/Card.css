@@ -1,0 +1,11 @@
+.simple-card {
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease-in;
+}
+
+.simple-card:hover {
+  transform: scale(1.02);
+}

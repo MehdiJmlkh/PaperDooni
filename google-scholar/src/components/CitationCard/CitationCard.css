@@ -1,16 +1,10 @@
-.citation-card {
-  border-radius: 15px;
-  padding: 1.5rem;
-  margin: 20px 0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transition: transform 0.15s ease-in;
-}
-
-.citation-card:hover {
-  transform: scale(1.02);
-}
-
 .citation-card__title {
   font-size: 2rem;
   color: var(--primary-color);
+}
+
+.citation-card {
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
 }
