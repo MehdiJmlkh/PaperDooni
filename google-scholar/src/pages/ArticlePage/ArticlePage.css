@@ -1,0 +1,18 @@
+.article-page {
+    margin: 0 1rem;
+}
+
+.article-page__title {
+  font-size: 3.5rem;
+}
+
+.article-page__heading {
+  font-size: 3rem;
+  color: #555;
+  margin-top: 2rem;
+}
+
+.article-page__content {
+    text-align: justify;
+    font-size: 1.5rem;
+}
