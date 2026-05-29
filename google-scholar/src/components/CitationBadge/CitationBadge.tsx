@@ -1,7 +1,7 @@
 import "./CitationBadge.css";
 
 interface Props {
-  children: string;
+  children: string | number;
 }
 
 const CitationBadge = ({ children }: Props) => {

@@ -1,11 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineArticle } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { ArticleSummary } from "../../services/articleService";
 import AnimatedCard from "../AnimatedCard";
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
-import { MdOutlineArticle } from "react-icons/md";
 
-const ArticleCard = () => {
+interface Props {
+  article: ArticleSummary;
+}
+
+const ArticleCard = ({ article }: Props) => {
   const navigate = useNavigate();
+
   return (
     <AnimatedCard
       className="article-card"
@@ -13,18 +19,11 @@ const ArticleCard = () => {
     >
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={35} />
-        <span className="article__title">Title</span>
+        <span className="article__title">{article.title}</span>
       </div>
-      <span className="article__year">2026</span>
-      <CitationBadge>2</CitationBadge>
-      <p className="article__abstract">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
-        quos magnam commodi aliquam doloremque, minus quis distinctio beatae aut
-        mollitia, vero dolor, iste maxime ea quibusdam tempora corporis atque
-        magni debitis nulla. Quidem fugiat aspernatur recusandae ratione
-        necessitatibus incidunt dicta iure est sed accusantium, ad nobis
-        tempora...
-      </p>
+      <span className="article__year">{article.year}</span>
+      <CitationBadge>{article.citedBy}</CitationBadge>
+      <p className="article__abstract">{article.abs.slice(0, 400)}...</p>
     </AnimatedCard>
   );
 };
