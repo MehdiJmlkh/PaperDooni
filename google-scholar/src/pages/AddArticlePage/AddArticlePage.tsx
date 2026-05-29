@@ -1,3 +1,4 @@
+import CheckBox from "../../components/CheckBox";
 import "./AddArticlePage.css";
 
 const AddArticlePage = () => {
@@ -6,43 +7,33 @@ const AddArticlePage = () => {
       <form className="form">
         <div>
           <label className="form-label add-article__label">Title</label>
-          <input className="form-control" />
+          <input className="form-control add-article__input" />
         </div>
         <div>
           <label className="form-label add-article__label">
             Publication Year
           </label>
-          <input className="form-control" type="number" />
+          <input className="form-control add-article__input" type="number" />
         </div>
         <div>
           <label className="form-label add-article__label">Abstract</label>
           <textarea
-            className="form-control"
+            className="form-control add-article__input"
             name="abstract"
             rows={8}
-          ></textarea>
+          />
         </div>
         <div>
           <label className="form-label add-article__label">Body</label>
-          <textarea className="form-control" name="body" rows={15}></textarea>
+          <textarea
+            className="form-control add-article__input"
+            name="body"
+            rows={15}
+          />
         </div>
-        <div>
-          <label className="form-label add-article__label">Citations</label>
-          <div>
-            <div className="article">
-              <input
-                className="form-check-input article__checkbox"
-                type="checkbox"
-                name="citations[] value=%s"
-              />
-              <label className="form-check-label">
-                <a href="ArticleDetails?title=%s" className="article__header">
-                  Title
-                </a>
-              </label>
-            </div>
-          </div>
-        </div>
+        <label className="form-label add-article__label">Citations</label>
+        <CheckBox>Title</CheckBox>
+        <CheckBox>Title</CheckBox>
         <button className="form__btn btn btn-primary" type="submit">
           Submit
         </button>
