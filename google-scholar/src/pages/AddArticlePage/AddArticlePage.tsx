@@ -1,3 +1,4 @@
+import Button from "../../components/Button";
 import CheckBox from "../../components/CheckBox";
 import "./AddArticlePage.css";
 
@@ -34,9 +35,8 @@ const AddArticlePage = () => {
         <label className="form-label add-article__label">Citations</label>
         <CheckBox>Title</CheckBox>
         <CheckBox>Title</CheckBox>
-        <button className="form__btn btn btn-primary" type="submit">
-          Submit
-        </button>
+        <Button>Clear</Button>
+        <Button>Submit</Button>
       </form>
     </main>
   );
