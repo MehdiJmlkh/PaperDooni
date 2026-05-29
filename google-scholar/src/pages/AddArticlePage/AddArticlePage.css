@@ -1,22 +1,16 @@
 .add-article {
   margin: 1rem;
+  font-size: 1.5rem;
 }
 
-.add-article__label {
-  font-size: 1.8rem;
+.add-article__input {
+  margin: 3rem 0;
 }
 
 .form {
   margin-top: 10px;
 }
 
-.form-label {
-  margin: 20px 0 5px;
-}
-
-.title-label {
-  margin-top: 10px;
-}
 
 .form__btn {
   margin-top: 15px;
@@ -42,3 +36,7 @@
 .add-article__submit {
   font-size: 2rem;
 }
+
+.form-control::placeholder {
+  color: #d3d3d3;
+} 
