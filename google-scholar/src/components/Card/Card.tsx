@@ -4,10 +4,15 @@ import "./Card.css";
 interface Props {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
-const Card = ({ children, className }: Props) => {
-  return <div className={`simple-card ${className}`}>{children}</div>;
+const Card = ({ children, className, onClick }: Props) => {
+  return (
+    <div onClick={onClick} className={`simple-card ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 export default Card;

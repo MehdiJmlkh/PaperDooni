@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../Card";
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
 import { MdOutlineArticle } from "react-icons/md";
 
 const ArticleCard = () => {
+  const navigate = useNavigate();
   return (
-    <Card className="article">
+    <Card className="article" onClick={() => navigate("/articles/1")}>
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={30} />
-        <Link to="/articles/1" className="article__title">
-          Title
-        </Link>
+        <span className="article__title">Title</span>
         <CitationBadge>2</CitationBadge>
       </div>
       <div className="article__year">2026</div>
