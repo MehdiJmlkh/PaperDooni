@@ -1,16 +1,16 @@
-import ArticleCard from '../../components/ArticleCard'
-import './HomePage.css'
+import ArticleCard from "../../components/ArticleCard";
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <main className='home-page'>
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
-    </main>
-  )
-}
+    <main className="home-page">
+      <ArticleCard />
+      <ArticleCard />
+      <ArticleCard />
+      <ArticleCard />
 
-export default HomePage
+    </main>
+  );
+};
+
+export default HomePage;

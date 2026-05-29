@@ -1,0 +1,38 @@
+.add-article {
+  margin: 1rem;
+}
+
+.add-article__label {
+  font-size: 1.8rem;
+}
+
+.form {
+  margin-top: 10px;
+}
+
+.form-label {
+  margin: 20px 0 5px;
+}
+
+.title-label {
+  margin-top: 10px;
+}
+
+.form__btn {
+  margin-top: 15px;
+}
+
+.article {
+  margin: 8px 0;
+}
+
+
+.article__header {
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.article__checkbox {
+  transform: scale(1.5);
+  margin-right: 6px;
+}
