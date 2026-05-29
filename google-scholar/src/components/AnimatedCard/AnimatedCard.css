@@ -1,4 +1,4 @@
-.simple-card {
+.animated-card {
   border-radius: 15px;
   padding: 1.5rem;
   margin: 20px 0;
@@ -7,6 +7,6 @@
   cursor: pointer;
 }
 
-.simple-card:hover {
+.animated-card:hover {
   transform: scale(1.02);
 }

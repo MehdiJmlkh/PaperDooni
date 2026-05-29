@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Card from "../Card";
+import AnimatedCard from "../AnimatedCard";
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
 import { MdOutlineArticle } from "react-icons/md";
@@ -7,7 +7,7 @@ import { MdOutlineArticle } from "react-icons/md";
 const ArticleCard = () => {
   const navigate = useNavigate();
   return (
-    <Card className="article" onClick={() => navigate("/articles/1")}>
+    <AnimatedCard className="article" onClick={() => navigate("/articles/1")}>
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={30} />
         <span className="article__title">Title</span>
@@ -24,7 +24,7 @@ const ArticleCard = () => {
         ducimus quae quas beatae voluptatum. Placeat suscipit sapiente voluptas
         labore iure consectetur mollitia consequatur ab at et dolorum, ullam
       </p>
-    </Card>
+    </AnimatedCard>
   );
 };
 
