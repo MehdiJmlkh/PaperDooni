@@ -7,7 +7,7 @@ interface Props {
 }
 
 const SimpleCard = ({ children, className }: Props) => {
-  return <div className={`my-card ${className}`}>{children}</div>;
+  return <div className={`simple-card ${className}`}>{children}</div>;
 };
 
 export default SimpleCard;
