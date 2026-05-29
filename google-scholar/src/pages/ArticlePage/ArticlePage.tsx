@@ -7,7 +7,7 @@ const ArticlePage = () => {
   return (
     <main className="article-page">
       <SimpleCard className="article-page__header">
-        <MdOutlineArticle className="article-page__title-icon" size={40} />
+        <MdOutlineArticle className="article-page__title-icon" size={45} />
         <h1 className="article-page__title">Title</h1>
         <span className="article-page__year">2026</span>
       </SimpleCard>

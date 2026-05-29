@@ -11,7 +11,7 @@
 
 .article-page__title-icon ,
 .article-page__title {
-  font-size: 3.5rem;
+  font-size: 4rem;
   display: inline;
   color: #555;
 }
@@ -21,12 +21,12 @@
   margin-left: auto;
 }
 .article-page__heading {
-  font-size: 3rem;
+  font-size: 3.4rem;
   color: #555;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .article-page__content {
   text-align: justify;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
