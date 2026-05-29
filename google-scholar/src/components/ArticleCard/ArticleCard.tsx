@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Card from "../Card";
 import CitationBadge from "../CitationBadge";
 import "./ArticleCard.css";
@@ -8,7 +9,9 @@ const ArticleCard = () => {
     <Card className="article">
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={30} />
-        <a className="article__title">Title</a>
+        <Link to="/articles/1" className="article__title">
+          Title
+        </Link>
         <CitationBadge>2</CitationBadge>
       </div>
       <div className="article__year">2026</div>
