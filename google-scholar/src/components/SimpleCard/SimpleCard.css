@@ -1,0 +1,8 @@
+.my-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  border-bottom: 1px solid #804900;
+  padding: 3rem;
+  min-height: 1vh;
+  margin: 3rem;
+}
