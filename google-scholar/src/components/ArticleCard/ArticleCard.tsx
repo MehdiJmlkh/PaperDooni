@@ -15,7 +15,7 @@ const ArticleCard = ({ article }: Props) => {
   return (
     <AnimatedCard
       className="article-card"
-      onClick={() => navigate("/articles/1")}
+      onClick={() => navigate(`/articles/${article.id}`)}
     >
       <div className="article__header">
         <MdOutlineArticle className="article__icon" size={35} />

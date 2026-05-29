@@ -1,6 +1,7 @@
 import apiClient from "./apiClient";
 
 export interface ArticleSummary {
+  id: number;
   title: string;
   abs: string;
   body: string;
