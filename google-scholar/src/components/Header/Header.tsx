@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import GoogleScholarIcon from "../GoogleScholarIcon";
 import SearchBar from "../SearchBar";
 import "./Header.css";
@@ -8,7 +9,9 @@ const Header = () => {
     <header className="header">
       <GoogleScholarIcon />
       <SearchBar />
-      <BiSolidMessageSquareAdd className="add-paper" />
+      <Link to="/articles/new">
+        <BiSolidMessageSquareAdd className="add-paper" />
+      </Link>
     </header>
   );
 };
