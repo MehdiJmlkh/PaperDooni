@@ -4,10 +4,12 @@
 
 .article-page__header {
   display: flex;
+  column-gap: 0.5rem;
   align-items: center;
   justify-content: space-between;
 }
 
+.article-page__title-icon ,
 .article-page__title {
   font-size: 3.5rem;
   display: inline;
@@ -16,6 +18,7 @@
 
 .article-page__year {
   font-size: 2rem;
+  margin-left: auto;
 }
 .article-page__heading {
   font-size: 3rem;

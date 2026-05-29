@@ -1,3 +1,4 @@
+import { MdOutlineArticle } from "react-icons/md";
 import CitationCard from "../../components/CitationCard";
 import SimpleCard from "../../components/SimpleCard";
 import "./ArticlePage.css";
@@ -6,6 +7,7 @@ const ArticlePage = () => {
   return (
     <main className="article-page">
       <SimpleCard className="article-page__header">
+        <MdOutlineArticle className="article-page__title-icon" size={40} />
         <h1 className="article-page__title">Title</h1>
         <span className="article-page__year">2026</span>
       </SimpleCard>
