@@ -6,10 +6,9 @@ import { useArticles } from "../../queries/useArticles";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
+  const pageSize = 4;
 
-  const { data: articles } = useArticles();
-
-  console.log(articles);
+  const { data: articles } = useArticles(page, pageSize);
 
   return (
     <main className="home-page">
@@ -17,7 +16,7 @@ const HomePage = () => {
         <ArticleCard article={article} />
       ))}
       <Pagination
-        totalPages={5}
+        totalPages={27}
         pageNumber={page}
         onClick={(next) => setPage(next)}
       />

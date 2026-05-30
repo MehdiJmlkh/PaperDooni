@@ -31,8 +31,10 @@ export interface AddArticleRequest {
 }
 
 class ArticleService {
-  getArticles() {
-    return apiClient.get<ArticleSummary[]>("/articles").then((res) => res.data);
+  getArticles(page: number, size: number) {
+    return apiClient
+      .get<ArticleSummary[]>("/articles", { params: { page, size } })
+      .then((res) => res.data);
   }
 
   getArticle(id: number) {
