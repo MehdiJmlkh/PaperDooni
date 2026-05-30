@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { Path, useForm } from "react-hook-form";
 import AddCitationCard from "../../components/AddCitationCard";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -8,11 +8,20 @@ import "./AddArticlePage.css";
 import { useAddArticle } from "../../queries/useAddArticle";
 
 const AddArticlePage = () => {
-  const { register, reset, handleSubmit } = useForm<AddArticleRequest>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<AddArticleRequest>();
+
+  const registerRequired = (name: Path<AddArticleRequest>) =>
+    register(name, { required: true });
 
   const addArticle = useAddArticle();
 
   const handleReset = () => reset();
+  
   const handleSubmitArticle = handleSubmit((data) =>
     addArticle.mutate({ ...data, citations: [] }),
   );
@@ -22,24 +31,24 @@ const AddArticlePage = () => {
       <h1 className="add-article__heading">Add Article</h1>
       <form className="form">
         <Input
-          {...register("title")}
+          {...registerRequired("title")}
           className="add-article__input"
           placeholder="Title"
         />
         <Input
-          {...register("year")}
+          {...registerRequired("year")}
           className="add-article__input"
           placeholder="Publication Year"
           type="number"
         />
         <TextArea
-          {...register("abs")}
+          {...registerRequired("abs")}
           className="add-article__input"
           placeholder="Abstract"
           rows={8}
         />
         <TextArea
-          {...register("body")}
+          {...registerRequired("body")}
           className="add-article__input"
           placeholder="Body"
           rows={15}
@@ -49,7 +58,9 @@ const AddArticlePage = () => {
           <Button onClick={handleReset} type="reset">
             Clear
           </Button>
-          <Button onClick={handleSubmitArticle}>Submit</Button>
+          <Button disable={!isValid} onClick={handleSubmitArticle}>
+            Submit
+          </Button>
         </div>
       </form>
     </main>
