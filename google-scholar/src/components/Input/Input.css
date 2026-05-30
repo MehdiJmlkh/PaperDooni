@@ -8,3 +8,7 @@
   border-color: var(--primary-color);
   box-shadow: 0 0 0 0.25rem var(--primary-color-shadow);
 }
+
+.form-control::placeholder {
+  color: #d3d3d3;
+} 
