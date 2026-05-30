@@ -1,9 +1,16 @@
 :root {
   --primary-color: #1e3a8a;
   --primary-color-shadow: rgba(30, 58, 138, 0.25);
-  
+  --primary-color-hover: #24459d;
+  --primary-color-active: #172554;
+  --primary-color-shadow-rgb: 30, 58, 138;
+
+  --secondary-color: #e2e8f0;
+  --disabled-text-color: #64748b;
+
+
+
   --text-color: #212529;
-  --secondary-color: #f8f9fa;
 
   --background-color: #f7f9fb;
 

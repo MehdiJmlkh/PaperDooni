@@ -3,10 +3,15 @@ import "./Button.css";
 
 interface Props {
   children: string;
+  disable?: boolean;
 }
 
-const Button = ({ children }: Props) => {
-  return <button className="btn btn-primary">{children}</button>;
+const Button = ({ children, disable = false }: Props) => {
+  return (
+    <button disabled={disable} className="btn btn-primary">
+      {children}
+    </button>
+  );
 };
 
 export default Button;
