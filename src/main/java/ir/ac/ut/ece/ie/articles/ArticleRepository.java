@@ -32,7 +32,7 @@ public class ArticleRepository {
                 .findFirst();
     }
 
-    public List<Article> containsSearchText(String searchText, Integer page, Integer size) {
+    public Page<Article> containsSearchText(String searchText, Integer page, Integer size) {
         var filteredArticles = articles
                 .stream()
                 .filter(article ->
@@ -53,6 +53,6 @@ public class ArticleRepository {
 
         var fromIndex = Math.max((page - 1) * size, 0);
         var toIndex = Math.min(page * size, filteredArticles.size());
-        return filteredArticles.subList(fromIndex, toIndex);
+         return new Page<>(filteredArticles.subList(fromIndex, toIndex), filteredArticles.size());
     }
 }

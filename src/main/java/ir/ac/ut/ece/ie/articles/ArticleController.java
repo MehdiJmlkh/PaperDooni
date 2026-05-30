@@ -15,7 +15,7 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping
-    public List<ArticleSummaryDto> getArticles(
+    public Page<ArticleSummaryDto> getArticles(
             @RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
             @RequestParam(value = "page") Integer page,
             @RequestParam(value = "size") Integer size) {

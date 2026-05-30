@@ -3,18 +3,19 @@ package ir.ac.ut.ece.ie.articles;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @AllArgsConstructor
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public List<ArticleSummaryDto> getArticles(String searchText, Integer page, Integer size) {
-        return articleRepository.containsSearchText(searchText, page, size).stream()
+    public Page<ArticleSummaryDto> getArticles(String searchText, Integer page, Integer size) {
+        var articlePage = articleRepository.containsSearchText(searchText, page, size);
+        var articles = articlePage.content.stream()
                 .map(articleMapper::toSummaryDto)
                 .toList();
+
+        return new Page<>(articles, articlePage.getTotal());
     }
 
     public ArticleDto getArticle(Long id) {
