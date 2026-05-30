@@ -3,12 +3,19 @@ import ArticleCard from "../../components/ArticleCard";
 import Pagination from "../../components/Pagination";
 import "./HomePage.css";
 import { useArticles } from "../../queries/useArticles";
+import { useSearchParams } from "react-router-dom";
 
 const HomePage = () => {
   const [page, setPage] = useState(1);
   const pageSize = 4;
 
-  const { data: articlePage } = useArticles(page, pageSize);
+  const [searchParams] = useSearchParams();
+
+  const { data: articlePage } = useArticles(
+    searchParams.get("searchText") || "",
+    page,
+    pageSize,
+  );
 
   return (
     <main className="home-page">
