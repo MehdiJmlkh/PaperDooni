@@ -1,23 +1,55 @@
+import { useForm } from "react-hook-form";
 import AddCitationCard from "../../components/AddCitationCard";
 import Button from "../../components/Button";
-import CheckBox from "../../components/CheckBox";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
+import { AddArticleRequest } from "../../services/articleService";
 import "./AddArticlePage.css";
+import { useAddArticle } from "../../queries/useAddArticle";
 
 const AddArticlePage = () => {
+  const { register, reset, handleSubmit } = useForm<AddArticleRequest>();
+
+  const addArticle = useAddArticle();
+
+  const handleReset = () => reset();
+  const handleSubmitArticle = handleSubmit((data) =>
+    addArticle.mutate({ ...data, citations: [] }),
+  );
+
   return (
     <main className="add-article">
       <h1 className="add-article__heading">Add Article</h1>
       <form className="form">
-        <Input className="add-article__input" placeholder="Title" />
-        <Input className="add-article__input" placeholder="Publication Year" type="number" />
-        <TextArea className="add-article__input" placeholder="Abstract" rows={8} />
-        <TextArea className="add-article__input" placeholder="Body" rows={15} />
+        <Input
+          {...register("title")}
+          className="add-article__input"
+          placeholder="Title"
+        />
+        <Input
+          {...register("year")}
+          className="add-article__input"
+          placeholder="Publication Year"
+          type="number"
+        />
+        <TextArea
+          {...register("abs")}
+          className="add-article__input"
+          placeholder="Abstract"
+          rows={8}
+        />
+        <TextArea
+          {...register("body")}
+          className="add-article__input"
+          placeholder="Body"
+          rows={15}
+        />
         <AddCitationCard />
         <div className="add-article__btns">
-        <Button>Clear</Button>
-        <Button>Submit</Button>
+          <Button onClick={handleReset} type="reset">
+            Clear
+          </Button>
+          <Button onClick={handleSubmitArticle}>Submit</Button>
         </div>
       </form>
     </main>
