@@ -1,31 +1,19 @@
 import Button from "../../components/Button";
 import CheckBox from "../../components/CheckBox";
 import Input from "../../components/Input";
+import TextArea from "../../components/TextArea";
 import "./AddArticlePage.css";
 
 const AddArticlePage = () => {
   return (
     <main className="add-article">
-        <h1>Add Article</h1>
+      <h1>Add Article</h1>
       <form className="form">
-        <Input placeholder="Title" className="add-article__input"/>
-        <Input placeholder="Publication Year" type="number"/>
-        <div>
-          <label className="form-label add-article__label">Abstract</label>
-          <textarea
-            className="form-control add-article__input"
-            name="abstract"
-            rows={8}
-          />
-        </div>
-        <div>
-          <label className="form-label add-article__label">Body</label>
-          <textarea
-            className="form-control add-article__input"
-            name="body"
-            rows={15}
-          />
-        </div>
+        <Input className="add-article__input" placeholder="Title" />
+        <Input className="add-article__input" placeholder="Publication Year" type="number" />
+        <TextArea className="add-article__input" placeholder="Abstract" rows={8} />
+        <TextArea className="add-article__input" placeholder="Body" rows={15} />
+
         <label className="form-label add-article__label">Citations</label>
         <CheckBox>Title</CheckBox>
         <CheckBox>Title</CheckBox>
