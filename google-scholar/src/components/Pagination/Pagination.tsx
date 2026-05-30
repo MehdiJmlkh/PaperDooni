@@ -4,16 +4,22 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 interface Props {
   pageNumber: number;
   totalPages: number;
+  visiblePages?: number;
   onClick: (page: number) => void;
 }
 
-const Pagination = ({ pageNumber, totalPages, onClick }: Props) => {
+const Pagination = ({
+  pageNumber,
+  totalPages,
+  onClick,
+  visiblePages = 5,
+}: Props) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  let startIndex = Math.max(pageNumber - 3, 0);
-  const endIndex = Math.min(startIndex + 5, pages.length);
+  let startIndex = Math.max(pageNumber - Math.floor((visiblePages + 1) / 2), 0);
+  const endIndex = Math.min(startIndex + visiblePages, pages.length);
   if (endIndex === pages.length) {
-    startIndex = Math.max(endIndex - 5, 0);
+    startIndex = Math.max(endIndex - visiblePages, 0);
   }
 
   return (
