@@ -32,8 +32,8 @@ public class ArticleRepository {
                 .findFirst();
     }
 
-    public List<Article> containsSearchText(String searchText) {
-        return articles
+    public List<Article> containsSearchText(String searchText, Integer page, Integer size) {
+        var filteredArticles = articles
                 .stream()
                 .filter(article ->
                         article.titleContains(searchText) || article.absContains(searchText))
@@ -50,5 +50,9 @@ public class ArticleRepository {
                     return b.compareTo(a);
                 })
                 .toList();
+
+        var fromIndex = Math.max((page - 1) * size, 0);
+        var toIndex = Math.min(page * size, filteredArticles.size());
+        return filteredArticles.subList(fromIndex, toIndex);
     }
 }

@@ -11,8 +11,8 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public List<ArticleSummaryDto> getArticles(String searchText) {
-        return articleRepository.containsSearchText(searchText).stream()
+    public List<ArticleSummaryDto> getArticles(String searchText, Integer page, Integer size) {
+        return articleRepository.containsSearchText(searchText, page, size).stream()
                 .map(articleMapper::toSummaryDto)
                 .toList();
     }

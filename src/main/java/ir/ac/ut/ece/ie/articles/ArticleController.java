@@ -16,8 +16,10 @@ public class ArticleController {
 
     @GetMapping
     public List<ArticleSummaryDto> getArticles(
-            @RequestParam(value = "searchText", required = false, defaultValue = "") String searchText) {
-        return articleService.getArticles(searchText);
+            @RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
+            @RequestParam(value = "page") Integer page,
+            @RequestParam(value = "size") Integer size) {
+        return articleService.getArticles(searchText, page, size);
     }
 
     @GetMapping("/{id}")
