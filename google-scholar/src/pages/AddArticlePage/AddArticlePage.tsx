@@ -6,6 +6,7 @@ import TextArea from "../../components/TextArea";
 import { useAddArticle } from "../../queries/useAddArticle";
 import { AddArticleRequest } from "../../services/articleService";
 import "./AddArticlePage.css";
+import { useState } from "react";
 
 const AddArticlePage = () => {
   const {
@@ -14,6 +15,7 @@ const AddArticlePage = () => {
     handleSubmit,
     formState: { isValid },
   } = useForm<AddArticleRequest>();
+  const [selectedArticleIds, setSelectedArticleIds] = useState<number[]>([]);
 
   const registerRequired = (name: Path<AddArticleRequest>) =>
     register(name, { required: true });
@@ -21,10 +23,18 @@ const AddArticlePage = () => {
   const addArticle = useAddArticle();
 
   const handleReset = () => reset();
-  
+
   const handleSubmitArticle = handleSubmit((data) =>
-    addArticle.mutate({ ...data, citations: [] }),
+    addArticle.mutate({ ...data, citations: selectedArticleIds }),
   );
+
+  const toggleArticle = (articleId: number) => {
+    setSelectedArticleIds((ids) =>
+      ids.includes(articleId)
+        ? ids.filter((id) => id !== articleId)
+        : [...ids, articleId],
+    );
+  };
 
   return (
     <main className="add-article">
@@ -53,7 +63,10 @@ const AddArticlePage = () => {
           placeholder="Body"
           rows={15}
         />
-        <AddCitationCard />
+        <AddCitationCard
+          selectedArticleIds={selectedArticleIds}
+          onToggleArticle={toggleArticle}
+        />
         <div className="add-article__btns">
           <Button onClick={handleReset} type="reset">
             Clear

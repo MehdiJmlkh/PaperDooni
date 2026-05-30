@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useArticles } from "../../queries/useArticles";
 import CheckBox from "../CheckBox";
 import Pagination from "../Pagination";
 import SearchBar from "../SearchBar";
 import SimpleCard from "../SimpleCard";
 import "./AddCitationCard.css";
-import { useArticles } from "../../queries/useArticles";
 
-const AddCitationCard = () => {
+interface Props {
+  selectedArticleIds: number[];
+  onToggleArticle: (articleId: number) => void;
+}
+
+const AddCitationCard = ({selectedArticleIds, onToggleArticle}: Props) => {
   const [searchText, setSearchText] = useState("");
 
   const pageSize = 4;
@@ -18,13 +23,20 @@ const AddCitationCard = () => {
     setSearchText(text);
     setPage(1);
   };
+
   return (
     <SimpleCard>
       <div className="add-citation__heading">Citations</div>
       <SearchBar onSubmit={handleSubmit} />
       <div className="add-citation__articles">
         {articlePage?.content.map((article) => (
-          <CheckBox>{article.title}</CheckBox>
+          <CheckBox
+            key={article.id}
+            checked={selectedArticleIds.includes(article.id)}
+            onChange={() => onToggleArticle(article.id)}
+          >
+            {article.title}
+          </CheckBox>
         ))}
         <Pagination
           totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
