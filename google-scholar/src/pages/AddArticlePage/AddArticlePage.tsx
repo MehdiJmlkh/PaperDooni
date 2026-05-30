@@ -7,14 +7,14 @@ import "./AddArticlePage.css";
 const AddArticlePage = () => {
   return (
     <main className="add-article">
-      <h1>Add Article</h1>
+      <h1 className="add-article__heading">Add Article</h1>
       <form className="form">
         <Input className="add-article__input" placeholder="Title" />
         <Input className="add-article__input" placeholder="Publication Year" type="number" />
         <TextArea className="add-article__input" placeholder="Abstract" rows={8} />
         <TextArea className="add-article__input" placeholder="Body" rows={15} />
 
-        <label className="form-label add-article__label">Citations</label>
+        <label className="add-article__label">Citations</label>
         <CheckBox>Title</CheckBox>
         <CheckBox>Title</CheckBox>
         <Button>Clear</Button>
