@@ -22,6 +22,14 @@ export interface Article {
   citations: Citation[];
 }
 
+export interface AddArticleRequest {
+  title: string;
+  abs: string;
+  body: string;
+  year: number;
+  citations: number[];
+}
+
 class ArticleService {
   getArticles() {
     return apiClient.get<ArticleSummary[]>("/articles").then((res) => res.data);
@@ -29,6 +37,15 @@ class ArticleService {
 
   getArticle(id: number) {
     return apiClient.get<Article>(`/articles/${id}`).then((res) => res.data);
+  }
+
+  addArticle(article: AddArticleRequest) {
+    return apiClient
+      .post("articles", article)
+      .then((res) => res.data)
+      .catch((err) => {
+        throw new Error(err.response.data);
+      });
   }
 }
 
