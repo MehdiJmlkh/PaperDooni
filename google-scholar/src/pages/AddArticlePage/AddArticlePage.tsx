@@ -1,3 +1,4 @@
+import AddCitationCard from "../../components/AddCitationCard";
 import Button from "../../components/Button";
 import CheckBox from "../../components/CheckBox";
 import Input from "../../components/Input";
@@ -13,12 +14,11 @@ const AddArticlePage = () => {
         <Input className="add-article__input" placeholder="Publication Year" type="number" />
         <TextArea className="add-article__input" placeholder="Abstract" rows={8} />
         <TextArea className="add-article__input" placeholder="Body" rows={15} />
-
-        <label className="add-article__label">Citations</label>
-        <CheckBox>Title</CheckBox>
-        <CheckBox>Title</CheckBox>
+        <AddCitationCard />
+        <div className="add-article__btns">
         <Button>Clear</Button>
         <Button>Submit</Button>
+        </div>
       </form>
     </main>
   );

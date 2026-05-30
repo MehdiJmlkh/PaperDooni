@@ -1,13 +1,32 @@
 .add-article {
   margin: 1rem;
   font-size: 1.5rem;
+  margin-bottom: 7rem;
 }
 
 .add-article__heading {
   margin: 2rem 0;
   font-size: 3rem;
+  text-align: center;
 }
 
 .add-article__input {
   margin: 3rem 0;
+}
+
+.add-article__btns {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .add-article__btns {
+    flex-direction: row;
+    column-gap: 2rem;
+  }
+
+  .add-article__heading {
+    text-align: left;
+  }
 }
