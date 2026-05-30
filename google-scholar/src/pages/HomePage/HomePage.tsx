@@ -19,9 +19,11 @@ const HomePage = () => {
 
   return (
     <main className="home-page">
-      {articlePage?.content.map((article) => (
-        <ArticleCard article={article} />
-      ))}
+      <div className="home-page__articles">
+        {articlePage?.content.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
       <Pagination
         totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
         pageNumber={page}

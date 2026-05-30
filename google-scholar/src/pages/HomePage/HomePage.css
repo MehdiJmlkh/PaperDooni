@@ -1,3 +1,8 @@
 .home-page {
     padding: 0 3rem;
+    margin-bottom: 7rem;
+}
+
+.home-page__articles {
+    min-height: 70vh;
 }
