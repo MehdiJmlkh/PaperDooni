@@ -12,8 +12,10 @@ const ArticlePage = () => {
   return (
     <main className="article-page">
       <SimpleCard className="article-page__header">
-        <MdOutlineArticle className="article-page__title-icon" size={45} />
-        <h1 className="article-page__title">{article?.title}</h1>
+        <span>
+          <MdOutlineArticle className="article-page__title-icon" size={45} />
+          <h1 className="article-page__title">{article?.title}</h1>
+        </span>
         <span className="article-page__year">{article?.year}</span>
       </SimpleCard>
       <SimpleCard>
