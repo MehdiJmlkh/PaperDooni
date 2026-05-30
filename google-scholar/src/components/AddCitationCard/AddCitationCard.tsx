@@ -11,7 +11,7 @@ interface Props {
   onToggleArticle: (articleId: number) => void;
 }
 
-const AddCitationCard = ({selectedArticleIds, onToggleArticle}: Props) => {
+const AddCitationCard = ({ selectedArticleIds, onToggleArticle }: Props) => {
   const [searchText, setSearchText] = useState("");
 
   const pageSize = 4;
@@ -38,12 +38,12 @@ const AddCitationCard = ({selectedArticleIds, onToggleArticle}: Props) => {
             {article.title}
           </CheckBox>
         ))}
-        <Pagination
-          totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
-          pageNumber={page}
-          onClick={(next) => setPage(next)}
-        />
       </div>
+      <Pagination
+        totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
+        pageNumber={page}
+        onClick={(next) => setPage(next)}
+      />
     </SimpleCard>
   );
 };

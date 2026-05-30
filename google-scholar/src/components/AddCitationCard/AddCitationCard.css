@@ -7,4 +7,5 @@
 .add-citation__articles {
   margin-top: 2rem;
   margin-left: 1.5rem;
+  min-height: 15rem;
 }
