@@ -8,15 +8,15 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const pageSize = 4;
 
-  const { data: articles } = useArticles(page, pageSize);
+  const { data: articlePage } = useArticles(page, pageSize);
 
   return (
     <main className="home-page">
-      {articles?.map((article) => (
+      {articlePage?.content.map((article) => (
         <ArticleCard article={article} />
       ))}
       <Pagination
-        totalPages={27}
+        totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
         pageNumber={page}
         onClick={(next) => setPage(next)}
       />

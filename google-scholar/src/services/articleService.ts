@@ -8,6 +8,11 @@ export interface ArticleSummary {
   citedBy: number;
 }
 
+export interface ArticlePage {
+  content: ArticleSummary[],
+  total: number;
+}
+
 export interface Citation {
   id: number;
   title: string;
@@ -33,7 +38,7 @@ export interface AddArticleRequest {
 class ArticleService {
   getArticles(page: number, size: number) {
     return apiClient
-      .get<ArticleSummary[]>("/articles", { params: { page, size } })
+      .get<ArticlePage>("/articles", { params: { page, size } })
       .then((res) => res.data);
   }
 
