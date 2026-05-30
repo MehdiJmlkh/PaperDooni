@@ -9,7 +9,7 @@ export interface ArticleSummary {
 }
 
 export interface ArticlePage {
-  content: ArticleSummary[],
+  content: ArticleSummary[];
   total: number;
 }
 
@@ -36,9 +36,9 @@ export interface AddArticleRequest {
 }
 
 class ArticleService {
-  getArticles(page: number, size: number) {
+  getArticles(searchText: string, page: number, size: number) {
     return apiClient
-      .get<ArticlePage>("/articles", { params: { page, size } })
+      .get<ArticlePage>("/articles", { params: { searchText, page, size } })
       .then((res) => res.data);
   }
 

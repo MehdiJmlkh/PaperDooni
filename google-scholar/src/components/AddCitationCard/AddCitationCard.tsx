@@ -7,13 +7,21 @@ import "./AddCitationCard.css";
 import { useArticles } from "../../queries/useArticles";
 
 const AddCitationCard = () => {
-  const [page, setPage] = useState(1);
+  const [searchText, setSearchText] = useState("");
+
   const pageSize = 4;
-  const { data: articlePage } = useArticles(page, pageSize);
+  const [page, setPage] = useState(1);
+
+  const { data: articlePage } = useArticles(searchText, page, pageSize);
+
+  const handleSubmit = (text: string) => {
+    setSearchText(text);
+    setPage(1);
+  };
   return (
     <SimpleCard>
       <div className="add-citation__heading">Citations</div>
-      <SearchBar />
+      <SearchBar onSubmit={handleSubmit} />
       <div className="add-citation__articles">
         {articlePage?.content.map((article) => (
           <CheckBox>{article.title}</CheckBox>

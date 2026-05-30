@@ -1,15 +1,25 @@
+import { useForm } from "react-hook-form";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+interface Props {
+  onSubmit: (searchText: string) => void;
+}
+
+const SearchBar = ({ onSubmit }: Props) => {
+  const { register, getValues } = useForm();
+
   return (
-    <form className="search-bar">
-      <input
-        name="search"
-        className="form-control"
-        type="text"
-        placeholder="Search papers..."
-      />
-    </form>
+    <input
+      {...register("searchText")}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          onSubmit(getValues("searchText"));
+        }
+      }}
+      className="form-control search-bar"
+      placeholder="Search papers..."
+    />
   );
 };
 

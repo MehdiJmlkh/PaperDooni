@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className="header">
       <GoogleScholarIcon />
-      <SearchBar />
+      <SearchBar onSubmit={() => console.log("header")} />
       <Link to="/articles/new">
         <BiSolidMessageSquareAdd className="add-paper" />
       </Link>
