@@ -1,3 +1,7 @@
+.article-page {
+  padding-bottom: 7rem;
+}
+
 .article-page__header {
   display: grid;
   grid-template-columns: 1fr auto;
