@@ -22,11 +22,16 @@ const AddArticlePage = () => {
 
   const addArticle = useAddArticle();
 
-  const handleReset = () => reset();
+  const handleReset = () => {
+    reset();
+    setSelectedArticleIds([]);
+  };
 
-  const handleSubmitArticle = handleSubmit((data) =>
-    addArticle.mutate({ ...data, citations: selectedArticleIds }),
-  );
+  const handleSubmitArticle = handleSubmit((data) => {
+    addArticle.mutate({ ...data, citations: selectedArticleIds });
+    reset();
+    setSelectedArticleIds([]);
+  });
 
   const toggleArticle = (articleId: number) => {
     setSelectedArticleIds((ids) =>
