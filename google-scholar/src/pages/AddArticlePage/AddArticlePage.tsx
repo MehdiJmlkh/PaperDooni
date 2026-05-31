@@ -7,6 +7,7 @@ import { useAddArticle } from "../../queries/useAddArticle";
 import { AddArticleRequest } from "../../services/articleService";
 import "./AddArticlePage.css";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AddArticlePage = () => {
   const {
@@ -32,6 +33,7 @@ const AddArticlePage = () => {
       { ...data, citations: selectedArticleIds },
       {
         onSuccess: () => {
+          toast.success("Article added successfully.");
           reset();
           setSelectedArticleIds([]);
         },
