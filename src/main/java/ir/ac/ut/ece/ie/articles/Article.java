@@ -26,11 +26,11 @@ public class Article implements Comparable<Article> {
     }
 
     public boolean titleContains(String searchText) {
-        return title.toLowerCase().contains(searchText);
+        return title.toLowerCase().contains(searchText.toLowerCase());
     }
 
     public boolean absContains(String searchText) {
-        return abs.toLowerCase().contains(searchText);
+        return abs.toLowerCase().contains(searchText.toLowerCase());
     }
 
     @Override
