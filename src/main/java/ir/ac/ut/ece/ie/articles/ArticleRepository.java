@@ -28,7 +28,7 @@ public class ArticleRepository {
 
     public Optional<Article> findByTitle(String title) {
         return articles.stream()
-                .filter(article -> article.getTitle().equals(title))
+                .filter(article -> article.getTitle().equalsIgnoreCase(title))
                 .findFirst();
     }
 
