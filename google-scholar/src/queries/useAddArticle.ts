@@ -3,6 +3,7 @@ import articleService, {
   AddArticleRequest,
   ArticleSummary,
 } from "../services/articleService";
+import { articleKeys } from "./queryKeys";
 
 export const useAddArticle = () => {
   const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ export const useAddArticle = () => {
     mutationFn: articleService.addArticle,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["articles"],
+        queryKey: articleKeys.all,
       });
     },
   });
