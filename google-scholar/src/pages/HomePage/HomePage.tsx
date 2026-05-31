@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArticleCard from "../../components/ArticleCard";
 import Pagination from "../../components/Pagination";
 import "./HomePage.css";
@@ -16,6 +16,10 @@ const HomePage = () => {
     page,
     pageSize,
   );
+
+  useEffect(() => {
+    setPage(1);
+  }, [searchParams]);
 
   return (
     <main className="home-page">
