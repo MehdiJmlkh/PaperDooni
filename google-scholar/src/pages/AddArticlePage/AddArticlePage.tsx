@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Path, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import AddCitationCard from "../../components/AddCitationCard";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -6,8 +8,6 @@ import TextArea from "../../components/TextArea";
 import { useAddArticle } from "../../queries/useAddArticle";
 import { AddArticleRequest } from "../../services/articleService";
 import "./AddArticlePage.css";
-import { useState } from "react";
-import { toast } from "react-toastify";
 
 const AddArticlePage = () => {
   const {
@@ -36,6 +36,13 @@ const AddArticlePage = () => {
           toast.success("Article added successfully.");
           reset();
           setSelectedArticleIds([]);
+        },
+        onError: (error) => {
+          toast.error(error.message)
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
         },
       },
     );
