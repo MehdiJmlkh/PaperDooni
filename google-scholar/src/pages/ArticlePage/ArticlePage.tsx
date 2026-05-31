@@ -26,7 +26,9 @@ const ArticlePage = () => {
         <h2 className="article-page__heading">Body</h2>
         <p className="article-page__content">{article?.body}</p>
       </SimpleCard>
-      <h2 className="article-page__heading">Citations</h2>
+      {article && article?.citations.length > 0 && (
+        <h2 className="article-page__heading">Citations</h2>
+      )}
       {article?.citations.map((citaion) => (
         <CitationCard citation={citaion} />
       ))}
