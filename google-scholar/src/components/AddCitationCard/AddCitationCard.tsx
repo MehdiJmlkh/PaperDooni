@@ -5,6 +5,7 @@ import Pagination from "../Pagination";
 import SearchBar from "../SearchBar";
 import SimpleCard from "../SimpleCard";
 import "./AddCitationCard.css";
+import CountBadge from "../CountBadge/CountBadge";
 
 interface Props {
   selectedArticleIds: number[];
@@ -25,8 +26,11 @@ const AddCitationCard = ({ selectedArticleIds, onToggleArticle }: Props) => {
   };
 
   return (
-    <SimpleCard>
-      <div className="add-citation__heading">Citations</div>
+    <SimpleCard className="add-citation">
+      <div className="add-citation__heading">
+        <span>Citations</span>
+        <CountBadge count={selectedArticleIds.length} />
+      </div>
       <SearchBar onSubmit={handleSubmit} />
       <div className="add-citation__articles">
         {articlePage?.content.map((article) => (

@@ -1,0 +1,8 @@
+.count-badge {
+    background: var(--secondary-color);
+    padding: 0.1rem 0.7rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    margin-left: 0.7rem;
+    color: gray;
+}
