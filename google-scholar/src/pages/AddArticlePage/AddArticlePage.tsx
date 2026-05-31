@@ -28,9 +28,15 @@ const AddArticlePage = () => {
   };
 
   const handleSubmitArticle = handleSubmit((data) => {
-    addArticle.mutate({ ...data, citations: selectedArticleIds });
-    reset();
-    setSelectedArticleIds([]);
+    addArticle.mutate(
+      { ...data, citations: selectedArticleIds },
+      {
+        onSuccess: () => {
+          reset();
+          setSelectedArticleIds([]);
+        },
+      },
+    );
   });
 
   const toggleArticle = (articleId: number) => {
@@ -49,6 +55,7 @@ const AddArticlePage = () => {
           {...registerRequired("title")}
           className="add-article__input"
           placeholder="Title"
+          error={addArticle.error?.message}
         />
         <Input
           {...registerRequired("year")}
