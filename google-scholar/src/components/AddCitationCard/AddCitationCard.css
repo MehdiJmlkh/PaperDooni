@@ -11,3 +11,9 @@
   margin-left: 1.5rem;
   min-height: 15rem;
 }
+
+@media (max-width: 425px) {
+  .add-citation__articles {
+    margin-left: 0.5rem;
+  }
+}
