@@ -47,6 +47,7 @@ const AddCitationCard = ({ selectedArticleIds, onToggleArticle }: Props) => {
         totalPages={Math.ceil((articlePage?.total || 1) / pageSize)}
         pageNumber={page}
         onClick={(next) => setPage(next)}
+        visiblePages={3}
       />
     </SimpleCard>
   );
