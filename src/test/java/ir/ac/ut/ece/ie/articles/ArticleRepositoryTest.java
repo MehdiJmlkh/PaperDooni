@@ -63,8 +63,8 @@ public class ArticleRepositoryTest {
 
     @Test
     void containsSearchText_emptySearchText_returnsAllArticlesSortedByCitations() {
-        var articles = articleRepository.containsSearchText("");
-
+        var articlePage = articleRepository.containsSearchText("", 1, 4);
+        var articles = articlePage.content;
         assertEquals(4, articles.size());
         assertEquals(initialArticles.get(1), articles.get(0));
         assertEquals(initialArticles.get(2), articles.get(1));
@@ -73,12 +73,46 @@ public class ArticleRepositoryTest {
     }
 
     @Test
-    void containsSearchText_nonEmptySearchText_returnsFilteredArticles() {
-        var articles = articleRepository.containsSearchText("search");
+    void containsSearchText_emptySearchTextAndFirstPage_returnsAllArticlesSortedByCitations() {
+        var articlePage = articleRepository.containsSearchText("", 1, 2);
+        var articles = articlePage.content;
+        assertEquals(2, articles.size());
+        assertEquals(initialArticles.get(1), articles.get(0));
+        assertEquals(initialArticles.get(2), articles.get(1));
+    }
 
+    @Test
+    void containsSearchText_emptySearchTextAndLastPage_returnsAllArticlesSortedByCitations() {
+        var articlePage = articleRepository.containsSearchText("", 2, 3);
+        var articles = articlePage.content;
+        assertEquals(1, articles.size());
+        assertEquals(initialArticles.get(3), articles.get(0));
+    }
+
+    @Test
+    void containsSearchText_nonEmptySearchText_returnsFilteredArticles() {
+        var articlePage = articleRepository.containsSearchText("search", 1, 4);
+        var articles = articlePage.content;
         assertEquals(3, articles.size());
         assertEquals(initialArticles.get(1), articles.get(0));
         assertEquals(initialArticles.get(0), articles.get(1));
         assertEquals(initialArticles.get(2), articles.get(2));
+    }
+
+    @Test
+    void containsSearchText_nonEmptySearchTextAndFirstPage_returnsFirstPageOfFilteredArticles() {
+        var articlePage = articleRepository.containsSearchText("search", 1, 2);
+        var articles = articlePage.content;
+        assertEquals(2, articles.size());
+        assertEquals(initialArticles.get(1), articles.get(0));
+        assertEquals(initialArticles.get(0), articles.get(1));
+    }
+
+    @Test
+    void containsSearchText_nonEmptySearchTextAndLastPage_returnsLastPageOfFilteredArticles() {
+        var articlePage = articleRepository.containsSearchText("search", 2, 2);
+        var articles = articlePage.content;
+        assertEquals(1, articles.size());
+        assertEquals(initialArticles.get(2), articles.get(0));
     }
 }
