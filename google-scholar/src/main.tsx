@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./index.css";
 import router from "./routes";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         }}
       />
       <RouterProvider router={router} />
+      <ReactQueryDevtools/>
     </QueryClientProvider>
   </React.StrictMode>,
 );
