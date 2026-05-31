@@ -1,9 +1,6 @@
-.article-page {
-  margin: 0 1rem;
-}
-
 .article-page__header {
   display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   row-gap: 1rem;
 }
@@ -24,6 +21,7 @@
 .article-page__year {
   font-size: 2rem;
 }
+
 .article-page__heading {
   font-size: 3.4rem;
   color: #555;
@@ -35,8 +33,31 @@
   font-size: 1.7rem;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
   .article-page__header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .article-page__title-icon,
+  .article-page__title {
+    font-size: 3rem;
+  }
+  .article-page__heading {
+    font-size: 2.5rem;
+  }
+  .article-page__content {
+    text-align: left;
+  }
+}
+
+@media (max-width: 425px) {
+  .article-page__title-icon,
+  .article-page__title {
+    font-size: 2.5rem;
+  }
+  .article-page__heading {
+    font-size: 2rem;
   }
 }
