@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/scholar?createDatabaseIfNotExist=true
+    username: root
+    password: NewPassword123!
