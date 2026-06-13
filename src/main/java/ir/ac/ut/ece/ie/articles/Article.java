@@ -1,7 +1,7 @@
 package ir.ac.ut.ece.ie.articles;
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,26 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "articles")
 public class Article implements Comparable<Article> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "abstract")
     private String abs;
+
+    @Column(name = "body")
     private String body;
+
+    @Column(name = "publication_year")
     private int year;
+
     private List<Article> citations = new ArrayList<>();
     private List<Article> citedBy = new ArrayList<>();
 
