@@ -12,7 +12,11 @@ public class ArticleService {
     public Page<ArticleSummaryDto> getArticles(String searchText, Integer page, Integer size) {
         var articlePage = articleRepository.containsSearchText(searchText, page, size);
         var articles = articlePage.content.stream()
-                .map(articleMapper::toSummaryDto)
+                .map(article -> articleMapper.toSummaryDto(
+                        article,
+                        articleRepository.getCitedByCount(article.getId())
+                    )
+                )
                 .toList();
 
         return new Page<>(articles, articlePage.getTotal());

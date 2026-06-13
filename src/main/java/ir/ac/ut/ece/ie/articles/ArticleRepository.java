@@ -1,11 +1,16 @@
 package ir.ac.ut.ece.ie.articles;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findByTitleIgnoreCase(String title);
+
+    @Query("select size(a.citedBy) from Article a where a.id = :id")
+    Integer getCitedByCount(@Param("id") Long id);
 
     default Page<Article> containsSearchText(String searchText, Integer page, Integer size) {
         var articles = findAll();
