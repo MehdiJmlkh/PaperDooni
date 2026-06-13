@@ -31,7 +31,15 @@ public class Article implements Comparable<Article> {
     @Column(name = "publication_year")
     private int year;
 
+    @ManyToMany
+    @JoinTable(
+            name = "article_citations",
+            joinColumns = @JoinColumn(name = "citing_article_id"),
+            inverseJoinColumns = @JoinColumn(name = "cited_article_id")
+    )
     private List<Article> citations = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "citations")
     private List<Article> citedBy = new ArrayList<>();
 
     public void addCitation(Article article) {
