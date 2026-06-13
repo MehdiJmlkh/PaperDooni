@@ -27,7 +27,7 @@ public class ArticleServiceTest {
         var request = new AddArticleRequest();
         request.setTitle("title");
 
-        when(articleRepository.findByTitle(any())).thenReturn(Optional.of(new Article()));
+        when(articleRepository.findByTitleIgnoreCase(any())).thenReturn(Optional.of(new Article()));
 
         assertThrows(TitleAlreadyExistsException.class, () -> articleService.addArticle(request));
     }
@@ -64,7 +64,7 @@ public class ArticleServiceTest {
         var articleDto = articleService.addArticle(request);
 
         var captor = ArgumentCaptor.forClass(Article.class);
-        verify(articleRepository).addArticle(captor.capture());
+        verify(articleRepository).save(captor.capture());
         var article = captor.getValue();
 
         assertEquals(request.getTitle(), articleDto.getTitle());

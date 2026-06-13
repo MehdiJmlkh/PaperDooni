@@ -1,38 +1,14 @@
 package ir.ac.ut.ece.ie.articles;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class ArticleRepository {
-    private final List<Article> articles = new ArrayList<>();
-    private Long lastGeneratedId = 0L;
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+    Optional<Article> findByTitleIgnoreCase(String title);
 
-    public void addArticle(Article article) {
-        article.setId(++lastGeneratedId);
-        articles.add(article);
-    }
-
-    public List<Article> getAll() {
-        return articles;
-    }
-
-    public Optional<Article> findById(Long id) {
-        return articles.stream()
-                .filter(article -> article.getId().equals(id))
-                .findFirst();
-    }
-
-    public Optional<Article> findByTitle(String title) {
-        return articles.stream()
-                .filter(article -> article.getTitle().equalsIgnoreCase(title))
-                .findFirst();
-    }
-
-    public Page<Article> containsSearchText(String searchText, Integer page, Integer size) {
+    default Page<Article> containsSearchText(String searchText, Integer page, Integer size) {
+        var articles = findAll();
         var filteredArticles = articles
                 .stream()
                 .filter(article ->

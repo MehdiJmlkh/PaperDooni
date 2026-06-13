@@ -26,7 +26,7 @@ public class ArticleService {
     }
 
     public ArticleDto addArticle(AddArticleRequest request) {
-        articleRepository.findByTitle(request.getTitle())
+        articleRepository.findByTitleIgnoreCase(request.getTitle())
                 .ifPresent(a -> { throw new TitleAlreadyExistsException(); });
 
         var article = articleMapper.toEntity(request);
@@ -36,7 +36,7 @@ public class ArticleService {
                                 .orElseThrow(CitationNotFoundException::new))
                 .forEach(article::addCitation);
 
-        articleRepository.addArticle(article);
+        articleRepository.save(article);
 
         return articleMapper.toDto(article);
     }
