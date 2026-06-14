@@ -23,10 +23,6 @@ public class ArticleMapper {
         articleDto.setBody(article.getBody());
         articleDto.setYear(article.getYear());
         articleDto.setAbs(article.getAbs());
-        var citations = article.getCitations().stream()
-                .map(this::toCitationDto)
-                .toList();
-        articleDto.setCitations(citations);
         return articleDto;
     }
 
@@ -51,6 +47,15 @@ public class ArticleMapper {
     }
 
     public CitationDto toCitationDto(Article article) {
+        var citationDto = new CitationDto();
+
+        citationDto.setId(article.getId());
+        citationDto.setTitle(article.getTitle());
+
+        return citationDto;
+    }
+
+    public CitationDto toCitationDto(CitationView article) {
         var citationDto = new CitationDto();
 
         citationDto.setId(article.getId());

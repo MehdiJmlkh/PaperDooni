@@ -25,8 +25,16 @@ public class ArticleService {
     public ArticleDto getArticle(Long id) {
         var article = articleRepository.findById(id)
                 .orElseThrow(ArticleNotFoundException::new);
+        var citations = articleRepository.findCitationsById(id);
 
-        return articleMapper.toDto(article);
+        var articleDto = articleMapper.toDto(article);
+
+        var citationDtoList = citations.stream()
+                .map(articleMapper::toCitationDto)
+                .toList();
+        articleDto.setCitations(citationDtoList);
+
+        return articleDto;
     }
 
     public ArticleDto addArticle(AddArticleRequest request) {
@@ -42,6 +50,12 @@ public class ArticleService {
 
         articleRepository.save(article);
 
-        return articleMapper.toDto(article);
+        var articleDto = articleMapper.toDto(article);
+        var citationDtoList = article.getCitations().stream()
+                .map(articleMapper::toCitationDto)
+                .toList();
+        articleDto.setCitations(citationDtoList);
+
+        return articleDto;
     }
 }
