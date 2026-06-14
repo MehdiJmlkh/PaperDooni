@@ -28,7 +28,7 @@ public class ArticleMapper {
 
     public Article toEntity(AddArticleRequest request) {
         var article = new Article();
-        article.setTitle(request.getTitle());
+        article.setTitle(request.getTitle().trim());
         article.setAbs(request.getAbs());
         article.setBody(request.getBody());
         article.setYear(request.getYear());

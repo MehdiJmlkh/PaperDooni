@@ -39,7 +39,7 @@ public class ArticleService {
     }
 
     public ArticleDto addArticle(AddArticleRequest request) {
-        articleRepository.findByTitleIgnoreCase(request.getTitle())
+        articleRepository.findByTitleIgnoreCase(request.getTitle().trim())
                 .ifPresent(a -> { throw new TitleAlreadyExistsException(); });
 
         var article = articleMapper.toEntity(request);
