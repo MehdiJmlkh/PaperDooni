@@ -26,16 +26,6 @@ public class ArticleMapper {
         return articleDto;
     }
 
-    public Article toEntity(ArticleJsonDto articleJsonDto) {
-        var article = new Article();
-        article.setTitle(articleJsonDto.getTitle());
-        article.setAbs(articleJsonDto.getAbs());
-        article.setBody(articleJsonDto.getBody());
-        article.setYear(articleJsonDto.getYear());
-
-        return  article;
-    }
-
     public Article toEntity(AddArticleRequest request) {
         var article = new Article();
         article.setTitle(request.getTitle());
