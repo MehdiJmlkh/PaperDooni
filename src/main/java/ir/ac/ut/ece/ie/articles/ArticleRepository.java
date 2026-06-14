@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findByTitleIgnoreCase(String title);
 
-    @Query("select c.id, c.title from Article a join a.citations c where a.id = :id")
+    @Query("select c.id as id, c.title as title from Article a join a.citations c where a.id = :id")
     List<CitationView> findCitationsById(Long id);
 
     @Query("select size(a.citedBy) from Article a where a.id = :id")
