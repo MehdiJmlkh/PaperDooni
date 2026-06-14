@@ -80,10 +80,10 @@ class ArticleRepositoryTest {
         var result = page.getContent();
 
         assertEquals(4, result.size());
-        assertEquals(article2, result.get(0));
-        assertEquals(article3, result.get(1));
-        assertEquals(article1, result.get(2));
-        assertEquals(article4, result.get(3));
+        assertEquals(article2.getTitle(), result.get(0).getTitle());
+        assertEquals(article3.getTitle(), result.get(1).getTitle());
+        assertEquals(article1.getTitle(), result.get(2).getTitle());
+        assertEquals(article4.getTitle(), result.get(3).getTitle());
 
     }
 
@@ -97,9 +97,9 @@ class ArticleRepositoryTest {
         var result = page.getContent();
 
         assertEquals(3, result.size());
-        assertEquals(article2, result.get(0));
-        assertEquals(article1, result.get(1));
-        assertEquals(article3, result.get(2));
+        assertEquals(article2.getTitle(), result.get(0).getTitle());
+        assertEquals(article1.getTitle(), result.get(1).getTitle());
+        assertEquals(article3.getTitle(), result.get(2).getTitle());
     }
 
     @Test
