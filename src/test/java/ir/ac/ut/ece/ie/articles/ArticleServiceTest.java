@@ -12,8 +12,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class ArticleServiceTest {
@@ -85,13 +84,20 @@ public class ArticleServiceTest {
 
     @Test
     void getArticle_validInput_returnsArticleDto() {
-        var citation1 = Article.builder().title("citation1").id(2L).build();
-        var citation2 = Article.builder().title("citation2").id(3L).build();
-
         var article = Article.builder().id(1L).title("title").abs("abs").body("body")
-                .year(2026).citations(List.of(citation1, citation2)).build();
+                .year(2026).build();
 
         when(articleRepository.findById(1L)).thenReturn(Optional.of(article));
+
+        CitationView citation1 = mock(CitationView.class);
+        when(citation1.getId()).thenReturn(2L);
+        when(citation1.getTitle()).thenReturn("Citation 1");
+
+        CitationView citation2 = mock(CitationView.class);
+        when(citation2.getId()).thenReturn(3L);
+        when(citation2.getTitle()).thenReturn("Citation 2");
+
+        when(articleRepository.findCitationsById(1L)).thenReturn(List.of(citation1, citation2));
 
         var articleDto = articleService.getArticle(1L);
 
@@ -100,7 +106,7 @@ public class ArticleServiceTest {
         assertEquals(article.getAbs(), articleDto.getAbs());
         assertEquals(article.getBody(), articleDto.getBody());
         assertEquals(article.getYear(), articleDto.getYear());
-        assertEquals(article.getCitations().size(), articleDto.getCitations().size());
+        assertEquals(2, articleDto.getCitations().size());
 
         var citationDto1 = articleDto.getCitations().get(0);
         var citationDto2 = articleDto.getCitations().get(1);
