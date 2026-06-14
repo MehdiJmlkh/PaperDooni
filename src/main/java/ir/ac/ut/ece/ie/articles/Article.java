@@ -47,14 +47,6 @@ public class Article implements Comparable<Article> {
         article.citedBy.add(this);
     }
 
-    public boolean titleContains(String searchText) {
-        return title.toLowerCase().contains(searchText.toLowerCase());
-    }
-
-    public boolean absContains(String searchText) {
-        return abs.toLowerCase().contains(searchText.toLowerCase());
-    }
-
     @Override
     public int compareTo(Article other) {
         if (citedBy.size() != other.citedBy.size()) {
