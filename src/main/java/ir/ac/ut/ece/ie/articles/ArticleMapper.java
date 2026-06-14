@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ArticleMapper {
-    public ArticleSummaryDto toSummaryDto(Article article, Integer citedBy) {
+    public ArticleSummaryDto toSummaryDto(ArticleView article, Integer citedBy) {
         var articleDto = new ArticleSummaryDto();
 
         articleDto.setId(article.getId());

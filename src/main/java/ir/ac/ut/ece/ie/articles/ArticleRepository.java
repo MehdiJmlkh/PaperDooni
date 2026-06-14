@@ -19,7 +19,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Integer getCitedByCount(@Param("id") Long id);
 
     @Query("""
-        select a
+        select a.id as id, a.title as title, a.abs as abs, a.year as year
         from Article a
         where lower(a.title) like lower(concat('%', :searchText, '%'))
             or lower(a.abs) like lower(concat('%', :searchText, '%'))
@@ -32,5 +32,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
             size(a.citedBy) desc,
             a.year desc
     """)
-    Page<Article> containsSearchText(String searchText, Pageable pageable);
+    Page<ArticleView> containsSearchText(String searchText, Pageable pageable);
 }
