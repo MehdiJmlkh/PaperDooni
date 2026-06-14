@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class Page<T> {
     List<T> content;
-    Integer total;
+    long total;
 }

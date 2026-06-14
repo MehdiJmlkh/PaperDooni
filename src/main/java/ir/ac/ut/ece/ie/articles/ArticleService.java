@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.ie.articles;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -9,9 +10,9 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
 
-    public Page<ArticleSummaryDto> getArticles(String searchText, Integer page, Integer size) {
-        var articlePage = articleRepository.containsSearchText(searchText, page, size);
-        var articles = articlePage.content.stream()
+    public Page<ArticleSummaryDto> getArticles(String searchText, Integer pageNumber, Integer size) {
+        var page = articleRepository.containsSearchText(searchText, PageRequest.of(pageNumber - 1, size));
+        var articles = page.getContent().stream()
                 .map(article -> articleMapper.toSummaryDto(
                         article,
                         articleRepository.getCitedByCount(article.getId())
@@ -19,7 +20,7 @@ public class ArticleService {
                 )
                 .toList();
 
-        return new Page<>(articles, articlePage.getTotal());
+        return new Page<>(articles, page.getTotalElements());
     }
 
     public ArticleDto getArticle(Long id) {

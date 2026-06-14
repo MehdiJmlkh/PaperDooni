@@ -1,5 +1,7 @@
 package ir.ac.ut.ece.ie.articles;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,28 +18,19 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("select size(a.citedBy) from Article a where a.id = :id")
     Integer getCitedByCount(@Param("id") Long id);
 
-    default Page<Article> containsSearchText(String searchText, Integer page, Integer size) {
-        var articles = findAll();
-        var filteredArticles = articles
-                .stream()
-                .filter(article ->
-                        article.titleContains(searchText) || article.absContains(searchText))
-                .sorted((a, b) -> {
-                    boolean aTitleContainsSearchText = a.titleContains(searchText);
-                    boolean bTitleContainsSearchText = b.titleContains(searchText);
-
-                    if (aTitleContainsSearchText && !bTitleContainsSearchText) {
-                        return -1;
-                    }
-                    else if (!aTitleContainsSearchText && bTitleContainsSearchText) {
-                        return 1;
-                    }
-                    return b.compareTo(a);
-                })
-                .toList();
-
-        var fromIndex = Math.max((page - 1) * size, 0);
-        var toIndex = Math.min(page * size, filteredArticles.size());
-         return new Page<>(filteredArticles.subList(fromIndex, toIndex), filteredArticles.size());
-    }
+    @Query("""
+        select a
+        from Article a
+        where lower(a.title) like lower(concat('%', :searchText, '%'))
+            or lower(a.abs) like lower(concat('%', :searchText, '%'))
+        order by
+            case
+                when lower(a.title) like lower(concat('%', :searchText, '%'))
+                then 0
+                else 1
+            end,
+            size(a.citedBy) desc,
+            a.year desc
+    """)
+    Page<Article> containsSearchText(String searchText, Pageable pageable);
 }
