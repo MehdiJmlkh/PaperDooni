@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.ie.users;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public void createUser(SignUpRequest request) {
         if (request.getEmail().isEmpty() && request.getPhoneNumber().isEmpty()) {
@@ -27,6 +29,7 @@ public class UserService {
         }
 
         var user = userMapper.toEntity(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(user);
     }
