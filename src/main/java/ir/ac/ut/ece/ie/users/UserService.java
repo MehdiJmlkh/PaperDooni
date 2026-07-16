@@ -10,7 +10,9 @@ public class UserService {
     private final UserMapper userMapper;
 
     public void createUser(SignUpRequest request) {
-        var user = userMapper.toEntity(request);
+        if (request.getEmail().isEmpty() && request.getPhoneNumber().isEmpty()) {
+            throw new EmailOrPhoneNumberRequired();
+        }
 
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new UsernameAlreadyExistsException();
@@ -23,6 +25,8 @@ public class UserService {
         if (userRepository.existsByPhoneNumber(request.getPhoneNumber())) {
             throw new PhoneNumberAlreadyExistsException();
         }
+
+        var user = userMapper.toEntity(request);
 
         userRepository.save(user);
     }

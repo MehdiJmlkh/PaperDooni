@@ -15,14 +15,15 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Map<String, String>> signUp(@Valid @RequestBody SignUpRequest request) {
-        if (request.getEmail().isEmpty() && request.getPhoneNumber().isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("error", "Email or phone number is required"));
-        }
-
         userService.createUser(request);
 
         return ResponseEntity.ok().build();
+    }
+
+    @ExceptionHandler(EmailOrPhoneNumberRequired.class)
+    public ResponseEntity<Map<String, String>> handleEmailOrPhoneNumberRequired() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "Email or phone number is required"));
     }
 
     @ExceptionHandler(UsernameAlreadyExistsException.class)
