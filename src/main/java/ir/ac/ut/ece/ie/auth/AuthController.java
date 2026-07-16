@@ -13,11 +13,13 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
+    private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest request) {
         var user = authService.login(request);
-        return ResponseEntity.ok().build();
+        var accessToken = jwtService.generateAccessToken(user);
+        return ResponseEntity.ok().body(new JwtResponse(accessToken));
     }
 
     @ExceptionHandler(InvalidUsernameOrPasswordException.class)
