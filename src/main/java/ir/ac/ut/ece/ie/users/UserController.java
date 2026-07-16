@@ -24,4 +24,22 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
+
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleUsernameAlreadyExistsException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("username", "Username already exits"));
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleEmailAlreadyExistsException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("email", "Email already exists"));
+    }
+
+    @ExceptionHandler(PhoneNumberAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handlePhoneNumberAlreadyExistsException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("phoneNumber", "Phone number already exists"));
+    }
 }
