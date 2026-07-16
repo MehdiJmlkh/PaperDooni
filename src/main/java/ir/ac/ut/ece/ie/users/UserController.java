@@ -13,7 +13,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/sign-up")
+    @PostMapping
     public ResponseEntity<Map<String, String>> signUp(@Valid @RequestBody SignUpRequest request) {
         if (request.getEmail().isEmpty() && request.getPhoneNumber().isEmpty()) {
             return ResponseEntity.badRequest()
