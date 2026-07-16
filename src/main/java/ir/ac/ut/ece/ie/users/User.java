@@ -1,7 +1,11 @@
 package ir.ac.ut.ece.ie.users;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
