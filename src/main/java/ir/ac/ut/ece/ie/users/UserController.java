@@ -68,4 +68,10 @@ public class UserController {
         return ResponseEntity.badRequest()
                 .body(Map.of("error", "New email must be different from current email"));
     }
+
+    @ExceptionHandler(PhoneNumberSameAsCurrentException.class)
+    public ResponseEntity<Map<String, String>> handlePhoneNumberSameAsCurrentException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "New phone number must be different from current phone number"));
+    }
 }

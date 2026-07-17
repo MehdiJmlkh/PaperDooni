@@ -74,6 +74,10 @@ public class UserService {
     public void changePhoneNumber(ChangePhoneNumberRequest request) {
         var user = authService.me();
 
+        if (user.getPhoneNumber().equals(request.getNewPhoneNumber())) {
+            throw new PhoneNumberSameAsCurrentException();
+        }
+
         if (userRepository.existsByPhoneNumber(request.getNewPhoneNumber())) {
             throw new PhoneNumberAlreadyExistsException();
         }
