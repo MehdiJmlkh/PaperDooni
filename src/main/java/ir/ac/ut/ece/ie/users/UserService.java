@@ -1,8 +1,14 @@
 package ir.ac.ut.ece.ie.users;
 
+import ir.ac.ut.ece.ie.articles.ArticleMapper;
+import ir.ac.ut.ece.ie.articles.ArticleRepository;
+import ir.ac.ut.ece.ie.articles.ArticleSummaryDto;
+import ir.ac.ut.ece.ie.auth.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -10,6 +16,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
+    private final ArticleMapper articleMapper;
+    private final ArticleRepository articleRepository;
 
     public void createUser(SignUpRequest request) {
         if (request.getEmail().isEmpty() && request.getPhoneNumber().isEmpty()) {
@@ -32,5 +41,18 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(user);
+    }
+
+    public List<ArticleSummaryDto> getUserArticles() {
+        var articles = authService.me()
+                .getArticles();
+
+        return articles.stream()
+                .map(article -> articleMapper.toSummaryDto(
+                        article,
+                        articleRepository.getCitedByCount(article.getId())
+                    )
+                )
+                .toList();
     }
 }

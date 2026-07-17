@@ -1,10 +1,12 @@
 package ir.ac.ut.ece.ie.users;
 
+import ir.ac.ut.ece.ie.articles.ArticleSummaryDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -18,6 +20,11 @@ public class UserController {
         userService.createUser(request);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/me/articles")
+    public List<ArticleSummaryDto> getUserArticles() {
+        return userService.getUserArticles();
     }
 
     @ExceptionHandler(EmailOrPhoneNumberRequired.class)
