@@ -55,4 +55,15 @@ public class UserService {
                 )
                 .toList();
     }
+
+    public void changeEmail(ChangeEmailRequest request) {
+        var user = authService.me();
+
+        if (userRepository.existsByEmail(request.getNewEmail())) {
+            throw new EmailAlreadyExistsException();
+        }
+
+        user.setEmail(request.getNewEmail());
+        userRepository.save(user);
+    }
 }

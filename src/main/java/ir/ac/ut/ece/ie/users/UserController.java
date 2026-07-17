@@ -27,6 +27,11 @@ public class UserController {
         return userService.getUserArticles();
     }
 
+    @PostMapping("/me/email")
+    public void changeEmail(@Valid @RequestBody ChangeEmailRequest request) {
+        userService.changeEmail(request);
+    }
+
     @ExceptionHandler(EmailOrPhoneNumberRequired.class)
     public ResponseEntity<Map<String, String>> handleEmailOrPhoneNumberRequired() {
         return ResponseEntity.badRequest()
