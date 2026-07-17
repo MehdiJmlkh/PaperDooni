@@ -15,21 +15,30 @@ import java.util.Date;
 public class JwtService {
     private final JwtConfig jwtConfig;
 
-    public String generateAccessToken(User user) {
+    public Jwt generateAccessToken(User user) {
         return generateToken(user, jwtConfig.getAccessTokenExpiration());
     }
 
-    public Long getSubjectFromToken(String token) {
-        var claims = getClaims(token);
-        return Long.valueOf(claims.getSubject());
+    public Jwt generateRefreshToken(User user) {
+        return generateToken(user, jwtConfig.getRefreshTokenExpiration());
     }
 
-    public boolean tokenIsExpired(String token) {
+    private Jwt generateToken(User user, int tokenExpiration) {
+        var claims = Jwts.claims()
+                .subject(user.getId().toString())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000L * tokenExpiration))
+                .build();
+
+        return new Jwt(claims, jwtConfig.getSecretKey());
+    }
+
+    public Jwt parse(String token) {
         try {
             var claims = getClaims(token);
-            return claims.getExpiration().before(new Date());
+            return new Jwt(claims, jwtConfig.getSecretKey());
         } catch (JwtException e) {
-            return false;
+            return null;
         }
     }
 
@@ -39,22 +48,5 @@ public class JwtService {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-    }
-
-    public String generateRefreshToken(User user) {
-        return generateToken(user, jwtConfig.getRefreshTokenExpiration());
-    }
-
-    private String generateToken(User user, int tokenExpiration) {
-        var claims = Jwts.claims()
-                .subject(user.getId().toString())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000L * tokenExpiration))
-                .build();
-
-        return Jwts.builder()
-                .claims(claims)
-                .signWith(jwtConfig.getSecretKey())
-                .compact();
     }
 }
