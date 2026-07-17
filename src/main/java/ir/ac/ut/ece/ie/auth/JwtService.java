@@ -1,5 +1,7 @@
 package ir.ac.ut.ece.ie.auth;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import ir.ac.ut.ece.ie.users.User;
@@ -29,4 +31,25 @@ public class JwtService {
                 .compact();
     }
 
+    public Long getSubjectFromToken(String token) {
+        var claims = getClaims(token);
+        return Long.valueOf(claims.getSubject());
+    }
+
+    public boolean tokenIsExpired(String token) {
+        try {
+            var claims = getClaims(token);
+            return claims.getExpiration().before(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
 }
