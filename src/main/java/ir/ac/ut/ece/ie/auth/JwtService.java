@@ -13,12 +13,14 @@ public class JwtService {
     @Value("${spring.jwt.secret}")
     private String secret;
 
+    @Value("${spring.jwt.accessTokenExpiration}")
+    private int accessTokenExpiration;
+
     public String generateAccessToken(User user) {
-        var tokenExpiration = 86400;
         var claims = Jwts.claims()
                 .subject(user.getId().toString())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
+                .expiration(new Date(System.currentTimeMillis() + 1000L * accessTokenExpiration))
                 .build();
 
         return Jwts.builder()
