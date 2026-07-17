@@ -3,6 +3,7 @@ package ir.ac.ut.ece.ie.auth;
 import ir.ac.ut.ece.ie.users.User;
 import ir.ac.ut.ece.ie.users.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,14 @@ public class AuthService {
         }
 
         return user;
+    }
+
+    public User me() {
+        var authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+
+        var userId = (Long) authentication.getPrincipal();
+
+        return userRepository.findById(userId).orElseThrow();
     }
 }

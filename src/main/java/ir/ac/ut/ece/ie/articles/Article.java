@@ -1,5 +1,6 @@
 package ir.ac.ut.ece.ie.articles;
 
+import ir.ac.ut.ece.ie.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,10 @@ public class Article implements Comparable<Article> {
 
     @Column(name = "publication_year")
     private int year;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
 
     @ManyToMany
     @JoinTable(

@@ -1,8 +1,12 @@
 package ir.ac.ut.ece.ie.users;
 
+import ir.ac.ut.ece.ie.articles.Article;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +29,7 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Article> articles = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package ir.ac.ut.ece.ie.articles;
 
+import ir.ac.ut.ece.ie.auth.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
+    private final AuthService authService;
 
     public Page<ArticleSummaryDto> getArticles(String searchText, Integer pageNumber, Integer size) {
         var page = articleRepository.containsSearchText(searchText, PageRequest.of(pageNumber - 1, size));
@@ -43,6 +45,9 @@ public class ArticleService {
                 .ifPresent(a -> { throw new TitleAlreadyExistsException(); });
 
         var article = articleMapper.toEntity(request);
+
+        var user = authService.me();
+        article.setAuthor(user);
 
         request.getCitations().stream()
                 .map(id -> articleRepository.findById(id)
