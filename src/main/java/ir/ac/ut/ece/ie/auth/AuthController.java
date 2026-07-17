@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.ie.auth;
 
 
+import ir.ac.ut.ece.ie.config.JwtConfig;
 import ir.ac.ut.ece.ie.users.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ public class AuthController {
     private final AuthService authService;
     private final JwtService jwtService;
     private final UserRepository userRepository;
+    private final JwtConfig jwtConfig;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(
@@ -28,7 +30,10 @@ public class AuthController {
         var accessToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-        var cookie = getRefreshTokenCookie(refreshToken.toString(), 604800);
+        var cookie = getRefreshTokenCookie(
+                refreshToken.toString(),
+                jwtConfig.getRefreshTokenExpiration()
+        );
         response.addCookie(cookie);
 
         return ResponseEntity.ok().body(new JwtResponse(accessToken.toString()));
