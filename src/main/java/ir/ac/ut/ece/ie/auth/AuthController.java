@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.ie.auth;
 
 
+import ir.ac.ut.ece.ie.users.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class AuthController {
     private final AuthService authService;
     private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(
@@ -34,6 +36,21 @@ public class AuthController {
 
         response.addCookie(cookie);
         return ResponseEntity.ok().body(new JwtResponse(accessToken));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtResponse> refresh(
+            @CookieValue(value = "refreshToken") String refreshToken
+    ) {
+        if (jwtService.tokenIsExpired(refreshToken)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        var userId = jwtService.getSubjectFromToken(refreshToken);
+        var user = userRepository.findById(userId).orElseThrow();
+        var accessToken = jwtService.generateAccessToken(user);
+
+        return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
     @ExceptionHandler(InvalidUsernameOrPasswordException.class)
