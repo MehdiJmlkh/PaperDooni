@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "articles")
-public class Article implements Comparable<Article>, ArticleView {
+public class Article implements Comparable<Article>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
