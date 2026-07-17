@@ -66,4 +66,16 @@ public class UserService {
         user.setEmail(request.getNewEmail());
         userRepository.save(user);
     }
+
+    public void changePhoneNumber(ChangePhoneNumberRequest request) {
+        var user = authService.me();
+
+        if (userRepository.existsByPhoneNumber(request.getNewPhoneNumber())) {
+            throw new PhoneNumberAlreadyExistsException();
+        }
+
+        user.setPhoneNumber(request.getNewPhoneNumber());
+
+        userRepository.save(user);
+    }
 }

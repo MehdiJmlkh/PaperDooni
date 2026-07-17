@@ -32,6 +32,12 @@ public class UserController {
         userService.changeEmail(request);
     }
 
+    @PostMapping("/me/phone-number")
+    public ResponseEntity<Void> changePhoneNumber(@RequestBody ChangePhoneNumberRequest request) {
+        userService.changePhoneNumber(request);
+        return ResponseEntity.noContent().build();
+    }
+
     @ExceptionHandler(EmailOrPhoneNumberRequired.class)
     public ResponseEntity<Map<String, String>> handleEmailOrPhoneNumberRequired() {
         return ResponseEntity.badRequest()
