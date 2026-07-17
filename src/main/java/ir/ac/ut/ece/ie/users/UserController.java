@@ -28,8 +28,9 @@ public class UserController {
     }
 
     @PostMapping("/me/email")
-    public void changeEmail(@Valid @RequestBody ChangeEmailRequest request) {
+    public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest request) {
         userService.changeEmail(request);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/me/phone-number")
