@@ -62,4 +62,10 @@ public class UserController {
         return ResponseEntity.badRequest()
                 .body(Map.of("phoneNumber", "Phone number already exists"));
     }
+
+    @ExceptionHandler(EmailSameAsCurrentException.class)
+    public ResponseEntity<Map<String, String>> handleEmailSameAsCurrentException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "New email must be different from current email"));
+    }
 }

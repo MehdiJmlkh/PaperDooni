@@ -59,6 +59,10 @@ public class UserService {
     public void changeEmail(ChangeEmailRequest request) {
         var user = authService.me();
 
+        if (user.getEmail().equals(request.getNewEmail())) {
+            throw new EmailSameAsCurrentException();
+        }
+
         if (userRepository.existsByEmail(request.getNewEmail())) {
             throw new EmailAlreadyExistsException();
         }
