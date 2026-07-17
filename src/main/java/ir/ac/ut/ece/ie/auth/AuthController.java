@@ -28,13 +28,9 @@ public class AuthController {
         var accessToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-        var cookie = new Cookie("refreshToken", refreshToken.toString());
-        cookie.setHttpOnly(true);
-        cookie.setPath("/auth/refresh");
-        cookie.setMaxAge(604800);
-        cookie.setSecure(true);
-
+        var cookie = getRefreshTokenCookie(refreshToken.toString(), 604800);
         response.addCookie(cookie);
+
         return ResponseEntity.ok().body(new JwtResponse(accessToken.toString()));
     }
 
@@ -55,15 +51,20 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletResponse response) {
-        var cookie = new Cookie("refreshToken", "");
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/auth/refresh");
-        cookie.setMaxAge(0);
+        var cookie = getRefreshTokenCookie("", 0);
 
         response.addCookie(cookie);
 
         return ResponseEntity.noContent().build();
+    }
+
+    private Cookie getRefreshTokenCookie(String refreshToken, int maxAge) {
+        var cookie = new Cookie("refreshToken", refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/auth/refresh");
+        cookie.setMaxAge(maxAge);
+        cookie.setSecure(true);
+        return cookie;
     }
 
     @ExceptionHandler(InvalidUsernameOrPasswordException.class)
