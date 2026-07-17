@@ -53,6 +53,19 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(accessToken.toString()));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        var cookie = new Cookie("refreshToken", "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/auth/refresh");
+        cookie.setMaxAge(0);
+
+        response.addCookie(cookie);
+
+        return ResponseEntity.noContent().build();
+    }
+
     @ExceptionHandler(InvalidUsernameOrPasswordException.class)
     public ResponseEntity<Map<String, String>> handleInvalidUsernameOrPasswordException() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
