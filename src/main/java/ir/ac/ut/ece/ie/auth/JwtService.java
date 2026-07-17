@@ -18,17 +18,11 @@ public class JwtService {
     @Value("${spring.jwt.accessTokenExpiration}")
     private int accessTokenExpiration;
 
-    public String generateAccessToken(User user) {
-        var claims = Jwts.claims()
-                .subject(user.getId().toString())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000L * accessTokenExpiration))
-                .build();
+    @Value("${spring.jwt.refreshTokenExpiration}")
+    private int refreshTokenExpiration;
 
-        return Jwts.builder()
-                .claims(claims)
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                .compact();
+    public String generateAccessToken(User user) {
+        return generateToken(user, accessTokenExpiration);
     }
 
     public Long getSubjectFromToken(String token) {
@@ -51,5 +45,22 @@ public class JwtService {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+    public String generateRefreshToken(User user) {
+        return generateToken(user, refreshTokenExpiration);
+    }
+
+    private String generateToken(User user, int tokenExpiration) {
+        var claims = Jwts.claims()
+                .subject(user.getId().toString())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000L * tokenExpiration))
+                .build();
+
+        return Jwts.builder()
+                .claims(claims)
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
+                .compact();
     }
 }
