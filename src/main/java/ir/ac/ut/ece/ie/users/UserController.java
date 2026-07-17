@@ -39,6 +39,12 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/me/password")
+    public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(request);
+        return ResponseEntity.noContent().build();
+    }
+
     @ExceptionHandler(EmailOrPhoneNumberRequired.class)
     public ResponseEntity<Map<String, String>> handleEmailOrPhoneNumberRequired() {
         return ResponseEntity.badRequest()
@@ -73,5 +79,11 @@ public class UserController {
     public ResponseEntity<Map<String, String>> handlePhoneNumberSameAsCurrentException() {
         return ResponseEntity.badRequest()
                 .body(Map.of("error", "New phone number must be different from current phone number"));
+    }
+
+    @ExceptionHandler(PasswordSameAsCurrentException.class)
+    public ResponseEntity<Map<String, String>> handlePasswordSameAsCurrentException() {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "New password must be different from current password"));
     }
 }

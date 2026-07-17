@@ -83,7 +83,18 @@ public class UserService {
         }
 
         user.setPhoneNumber(request.getNewPhoneNumber());
+        userRepository.save(user);
+    }
 
+    public void changePassword(ChangePasswordRequest request) {
+        var newPassword = request.getNewPassword();
+        var user = authService.me();
+
+        if(passwordEncoder.matches(newPassword, user.getPassword())) {
+            throw new PasswordSameAsCurrentException();
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 }
