@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/me/phone-number")
-    public ResponseEntity<Void> changePhoneNumber(@RequestBody ChangePhoneNumberRequest request) {
+    public ResponseEntity<Void> changePhoneNumber(@Valid @RequestBody ChangePhoneNumberRequest request) {
         userService.changePhoneNumber(request);
         return ResponseEntity.noContent().build();
     }
