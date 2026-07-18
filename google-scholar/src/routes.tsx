@@ -6,6 +6,7 @@ import AddArticlePage from "./pages/AddArticlePage";
 import ErrorPage from "./pages/ErrorPage";
 import SignInPage from "./pages/SignInPage";
 import AuthLayout from "./pages/AuthLayout/AuthLayout";
+import SignUpPage from "./pages/SignUpPage";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,10 @@ const router = createBrowserRouter([
       },
       {
         element: <AuthLayout />,
-        children: [{ path: "/sign-in", element: <SignInPage /> }],
+        children: [
+          { path: "/sign-in", element: <SignInPage /> },
+          { path: "/sign-up", element: <SignUpPage /> },
+        ],
       },
     ],
   },
