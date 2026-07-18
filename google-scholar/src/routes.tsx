@@ -8,16 +8,21 @@ import SignInPage from "./pages/SignInPage";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    path: "/",
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: "articles", element: <HomePage /> },
-      { path: "articles/:id", element: <ArticlePage /> },
-      { path: "articles/new", element: <AddArticlePage /> },
+      {
+        element: <Layout />,
+        children: [
+          { index: true, element: <HomePage /> },
+          { path: "articles", element: <HomePage /> },
+          { path: "articles/:id", element: <ArticlePage /> },
+          { path: "articles/new", element: <AddArticlePage /> },
+        ],
+      },
+      { path: "/sign-in", element: <SignInPage /> },
     ],
   },
-  {path:"/sign-in" ,element: <SignInPage />}
 ]);
 
 export default router;
