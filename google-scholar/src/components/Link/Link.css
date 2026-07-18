@@ -1,0 +1,9 @@
+.link {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.link:focus {
+  outline-color: var(--color-primary);
+}
