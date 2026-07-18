@@ -14,7 +14,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           {...rest}
           ref={ref}
         />
-        <p className="text-danger input__error">{error}</p>
+        {error && <p className="text-danger input__error">{error}</p>}
       </div>
     );
   },
