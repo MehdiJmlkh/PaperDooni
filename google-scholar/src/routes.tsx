@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import ArticlePage from "./pages/ArticlePage";
 import AddArticlePage from "./pages/AddArticlePage";
 import ErrorPage from "./pages/ErrorPage";
+import SignInPage from "./pages/SignInPage";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "articles/new", element: <AddArticlePage /> },
     ],
   },
+  {path:"/sign-in" ,element: <SignInPage />}
 ]);
 
 export default router;
