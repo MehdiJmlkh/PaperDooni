@@ -16,7 +16,7 @@ const SignUpPage = () => {
       <Button>Sign Up</Button>
       <div className="form__footer">
         <span>Already have an account? </span>
-        <Link to="">Sign in</Link>
+        <Link to="/sign-in">Sign in</Link>
       </div>
     </Form>
   );
