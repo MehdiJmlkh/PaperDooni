@@ -1,13 +1,13 @@
-import { isValid, z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
 import PasswordInput from "../../components/PasswordInput";
-import "./SignUpPage.css";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignUp } from "../../queries/useSignUp";
+import "./SignUpPage.css";
 
 const schema = z.object({
   username: z.string(),
