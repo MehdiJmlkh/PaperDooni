@@ -7,6 +7,7 @@ import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import "./SignUpPage.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSignUp } from "../../queries/useSignUp";
 
 const schema = z.object({
   username: z.string().min(1),
@@ -25,8 +26,11 @@ const SignUpPage = () => {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+
+  const signUp = useSignUp();
+  
   return (
-    <Form onSubmit={handleSubmit((data) => console.log(data))}>
+    <Form onSubmit={handleSubmit((data) => signUp.mutate(data))}>
       <h1 className="form__heading">Sign Up</h1>
       <Input {...register("username")} placeholder="Username" />
       <PasswordInput {...register("password")} placeholder="Password" />
