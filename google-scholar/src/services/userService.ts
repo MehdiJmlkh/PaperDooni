@@ -25,9 +25,9 @@ class UserService {
       });
   }
 
-  editEmail(request: EditEmailRequest) {
+  editEmail(newEmail: string) {
     return apiClient
-      .post("/users/me/email", request)
+      .post("/users/me/email", { newEmail })
       .then((res) => res.data)
       .catch((err) => {
         throw err.response.data.email;
