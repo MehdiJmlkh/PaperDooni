@@ -1,0 +1,45 @@
+.modal-card {
+  width: 42rem;
+  padding: 3rem 3.5rem;
+  background: #fff;
+  font-size: 1.5rem;
+  border-radius: var(--border-radius);
+}
+
+.modal-card__title {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.modal-card__body {
+  display: grid;
+  row-gap: 2.5rem;
+}
+
+@media (max-width: 420px) {
+  .modal-card {
+    width: 100%;
+    overflow-y: auto;
+  }
+}
+
+.modal-card--pop {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2000;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.modal-card--pop.show {
+  transform: translate(50%, -50%) scale(1);
+  pointer-events: all;
+  opacity: 1;
+}
