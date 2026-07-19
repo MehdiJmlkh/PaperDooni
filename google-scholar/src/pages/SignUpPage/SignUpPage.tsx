@@ -18,11 +18,12 @@ const schema = z.object({
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/,
       "Password must include uppercase, lowercase, and a number",
     ),
-  email: z.string().email("Email must be valid"),
+  email: z.string().email("Email must be valid").or(z.literal("")),
   phoneNumber: z
     .string()
     .regex(/^0/, "Phone number must start with 0")
-    .length(11, "Phone number must contain 11 digits"),
+    .length(11, "Phone number must contain 11 digits")
+    .or(z.literal("")),
 });
 
 type FormData = z.infer<typeof schema>;
