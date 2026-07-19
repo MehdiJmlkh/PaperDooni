@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import authService, { LoginRequest } from "../services/authService";
 
-export const useLogin = (request: LoginRequest) =>
-  useQuery({
-    queryKey: ["auth", request.username],
-    queryFn: () => authService.login(request),
+export const useLogin = () =>
+  useMutation({
+    mutationFn: authService.login,
   });
