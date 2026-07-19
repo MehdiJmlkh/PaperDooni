@@ -1,0 +1,10 @@
+.user-account {
+  display: grid;
+  font-size: 1.7rem;
+  row-gap: 1.5rem;
+}
+
+.user-account__icon {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
