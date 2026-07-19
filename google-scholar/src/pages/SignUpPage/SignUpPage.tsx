@@ -28,14 +28,26 @@ const SignUpPage = () => {
   });
 
   const signUp = useSignUp();
-  
+
   return (
     <Form onSubmit={handleSubmit((data) => signUp.mutate(data))}>
       <h1 className="form__heading">Sign Up</h1>
-      <Input {...register("username")} placeholder="Username" />
+      <Input
+        {...register("username")}
+        error={signUp.error?.username}
+        placeholder="Username"
+      />
       <PasswordInput {...register("password")} placeholder="Password" />
-      <Input {...register("email")} placeholder="Email" />
-      <Input {...register("phoneNumber")} placeholder="Phone Number" />
+      <Input
+        {...register("email")}
+        error={signUp.error?.email}
+        placeholder="Email"
+      />
+      <Input
+        {...register("phoneNumber")}
+        error={signUp.error?.phoneNumber}
+        placeholder="Phone Number"
+      />
       <Button disable={!isValid}>Sign Up</Button>
       <div className="form__footer">
         <span>Already have an account? </span>

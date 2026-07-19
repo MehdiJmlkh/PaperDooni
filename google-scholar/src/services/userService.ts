@@ -13,7 +13,7 @@ class UserService {
       .post("/users", request)
       .then((res) => res.data)
       .catch((err) => {
-        throw new Error(err.response.data);
+        throw err.response.data;
       });
   }
 }
