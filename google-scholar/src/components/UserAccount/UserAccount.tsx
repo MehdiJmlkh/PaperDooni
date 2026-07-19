@@ -9,6 +9,7 @@ import { useLogout } from "../../queries/useLogout";
 import Modal from "../Modal/Modal";
 import EditEmailModal from "../EditEmailModal";
 import EditPhoneNumberModal from "../EditPhoneNumberModal";
+import EditPasswordModal from "../EditPasswordModal";
 interface Props {
   className?: string;
 }
@@ -37,7 +38,8 @@ const UserAccount = ({ className }: Props) => {
       </Card>
 
       <EditEmailModal show={false} />
-      <EditPhoneNumberModal show={true} />
+      <EditPhoneNumberModal show={false} />
+      <EditPasswordModal show={true}/>
     </>
   );
 };
