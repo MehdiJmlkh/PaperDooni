@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import Link from "../../components/Link";
-import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import PasswordInput from "../../components/PasswordInput";
 import "./SignUpPage.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,9 +47,9 @@ const SignUpPage = () => {
   const phoneNumber = watch("phoneNumber");
 
   const canSubmit =
-    username.trim() !== "" &&
-    password.trim() !== "" &&
-    (email.trim() !== "" || phoneNumber.trim() !== "");
+    username?.trim() !== "" &&
+    password?.trim() !== "" &&
+    (email?.trim() !== "" || phoneNumber?.trim() !== "");
 
   return (
     <Form onSubmit={handleSubmit((data) => signUp.mutate(data))}>
