@@ -2,6 +2,7 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:8080",
+  withCredentials: true,
 });
 
 apiClient.interceptors.request.use(
@@ -14,7 +15,6 @@ apiClient.interceptors.request.use(
   },
   (error) => Promise.reject(error),
 );
-
 
 let refreshPromise: Promise<string> | null = null;
 
@@ -49,8 +49,7 @@ apiClient.interceptors.response.use(
 
         const newAccessToken = await refreshPromise;
 
-        originalRequest.headers.Authorization = 
-          `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         return apiClient(originalRequest);
       } catch (refreshError) {
