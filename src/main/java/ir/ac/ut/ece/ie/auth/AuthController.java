@@ -75,6 +75,6 @@ public class AuthController {
     @ExceptionHandler(InvalidUsernameOrPasswordException.class)
     public ResponseEntity<Map<String, String>> handleInvalidUsernameOrPasswordException() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(Map.of("error", "Invalid username or password"));
+                .body(Map.of("error", "Invalid username or password."));
     }
 }
