@@ -15,6 +15,19 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
+
+let refreshPromise: Promise<string> | null = null;
+
+async function refreshAccessToken(): Promise<string> {
+  const response = await apiClient.post("/auth/refresh");
+
+  const token = response.data.token;
+
+  localStorage.setItem("accessToken", token);
+
+  return token;
+}
+
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -28,13 +41,16 @@ apiClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const response = await apiClient.post("/auth/refresh");
+        if (!refreshPromise) {
+          refreshPromise = refreshAccessToken().finally(() => {
+            refreshPromise = null;
+          });
+        }
 
-        const newAccessToken = response.data.token;
+        const newAccessToken = await refreshPromise;
 
-        localStorage.setItem("accessToken", newAccessToken);
-
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = 
+          `Bearer ${newAccessToken}`;
 
         return apiClient(originalRequest);
       } catch (refreshError) {
