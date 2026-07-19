@@ -8,6 +8,7 @@ import Button from "../Button";
 import { useLogout } from "../../queries/useLogout";
 import Modal from "../Modal/Modal";
 import EditEmailModal from "../EditEmailModal";
+import EditPhoneNumberModal from "../EditPhoneNumberModal";
 interface Props {
   className?: string;
 }
@@ -35,7 +36,8 @@ const UserAccount = ({ className }: Props) => {
         </Button>
       </Card>
 
-      <EditEmailModal show={true} />
+      <EditEmailModal show={false} />
+      <EditPhoneNumberModal show={true} />
     </>
   );
 };
