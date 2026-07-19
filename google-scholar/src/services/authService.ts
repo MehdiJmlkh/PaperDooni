@@ -14,6 +14,10 @@ class AuthService {
         throw new Error(err.response.data.error);
       });
   }
+
+  logout() {
+    return apiClient.post("/auth/logout").then((res) => res.data);
+  }
 }
 
 export default new AuthService();

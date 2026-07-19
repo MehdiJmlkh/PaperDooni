@@ -4,11 +4,15 @@ import { LuMail } from "react-icons/lu";
 import { LuPhone } from "react-icons/lu";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import "./UserAccount.css";
+import Button from "../Button";
+import { useLogout } from "../../queries/useLogout";
 interface Props {
   className?: string;
 }
 
 const UserAccount = ({ className }: Props) => {
+  const logout = useLogout();
+
   return (
     <Card className={`user-account ${className}`}>
       <div>
@@ -23,6 +27,9 @@ const UserAccount = ({ className }: Props) => {
         <LuPhone className="user-account__icon" />
         <span>09178313266</span>
       </div>
+      <Button className="logout-btn" onClick={() => logout.mutate()}>
+        Logout
+      </Button>
     </Card>
   );
 };

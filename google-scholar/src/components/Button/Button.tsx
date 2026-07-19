@@ -5,6 +5,7 @@ interface Props {
   disable?: boolean;
   onClick?: () => void;
   type?: "submit" | "reset";
+  className?: string;
 }
 
 const Button = ({
@@ -12,12 +13,13 @@ const Button = ({
   disable = false,
   onClick,
   type = "submit",
+  className,
 }: Props) => {
   return (
     <button
       type={type}
       disabled={disable}
-      className="btn btn-primary"
+      className={`btn btn-primary ${className}`}
       onClick={onClick}
     >
       {children}

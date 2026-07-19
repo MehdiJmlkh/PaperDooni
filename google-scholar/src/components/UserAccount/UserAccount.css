@@ -1,5 +1,10 @@
 .user-account {
   display: grid;
+  grid-template-areas:
+    "username"
+    "email"
+    "phone"
+    "logout";
   font-size: 1.7rem;
   row-gap: 1.5rem;
 }
@@ -7,4 +12,24 @@
 .user-account__icon {
   font-size: 2.5rem;
   margin-right: 1rem;
+}
+
+.logout-btn {
+  grid-area: logout;
+}
+
+@media (min-width: 768px) {
+  .user-account {
+    grid-template-areas:
+      "username logout"
+      "email logout"
+      "phone logout";
+  }
+
+  .logout-btn {
+    width: fit-content;
+    height: fit-content;
+    justify-self: end;
+    align-self: center;
+  }
 }
