@@ -34,9 +34,9 @@ class UserService {
       });
   }
 
-  editPhoneNumber(request: EditPhoneNumberRequest) {
+  editPhoneNumber(newPhoneNumber: string) {
     return apiClient
-      .post("/users/me/phone-number", request)
+      .post("/users/me/phone-number", { newPhoneNumber })
       .then((res) => res.data)
       .catch((err) => {
         throw err.response.data.phoneNumber;
