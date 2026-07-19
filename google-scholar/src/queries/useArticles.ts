@@ -8,3 +8,4 @@ export const useArticles = (searchText: string, page: number, size: number) => {
     queryFn: () => articleService.getArticles(searchText, page, size),
   });
 };
+  
