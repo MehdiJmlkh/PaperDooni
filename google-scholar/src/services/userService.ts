@@ -42,6 +42,15 @@ class UserService {
         throw err.response.data.phoneNumber;
       });
   }
+
+  editPassword(newPassword: string) {
+    return apiClient
+      .post("/users/me/password", { newPassword })
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err.response.data.password;
+      });
+  }
 }
 
 export default new UserService();
