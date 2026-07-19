@@ -1,0 +1,5 @@
+.plain-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  padding: 2rem 3rem;
+}
