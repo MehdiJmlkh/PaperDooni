@@ -8,7 +8,7 @@ export interface LoginRequest {
 class AuthService {
   login(request: LoginRequest) {
     return apiClient
-      .post("/articles/login", request)
+      .post("/auth/login", request)
       .then((res) => res.data)
       .catch((err) => {
         throw new Error(err.response.data);
