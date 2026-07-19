@@ -5,11 +5,12 @@ import "./EditPasswordModal.css";
 
 interface Props {
   show: boolean;
+  onClose: () => void;
 }
 
-const EditPasswordModal = ({ show }: Props) => {
+const EditPasswordModal = ({ show, onClose }: Props) => {
   return (
-    <Modal title="Edit Password" show={show}>
+    <Modal title="Edit Password" show={show} onClose={onClose}>
       <Input placeholder="New Password" />
       <Button className="">Submit</Button>
     </Modal>

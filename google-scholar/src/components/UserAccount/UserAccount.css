@@ -18,6 +18,14 @@
   grid-area: logout;
 }
 
+.edit-btns {
+  display: flex;
+  margin: 3rem 3rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  flex-direction: column;
+}
+
 @media (min-width: 768px) {
   .user-account {
     grid-template-areas:
@@ -31,5 +39,9 @@
     height: fit-content;
     justify-self: end;
     align-self: center;
+  }
+
+  .edit-btns {
+    flex-direction: row;
   }
 }
