@@ -33,7 +33,7 @@ const SignInPage = () => {
       <Input {...register("username")} placeholder="Username" />
       <PasswordInput {...register("password")} placeholder="Password" />
       <div>
-        <p className="form__error">{login.error?.message}</p>
+        {login.error && <p className="form__error">{login.error?.message}</p>}
         <Button disable={!isValid}>Sign in</Button>
       </div>
       <div className="form__footer">
