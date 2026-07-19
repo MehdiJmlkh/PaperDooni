@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import SignInPage from "./pages/SignInPage";
 import AuthLayout from "./pages/AuthLayout/AuthLayout";
 import SignUpPage from "./pages/SignUpPage";
+import UserPage from "./pages/UserPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
           { path: "articles", element: <HomePage /> },
           { path: "articles/:id", element: <ArticlePage /> },
           { path: "articles/new", element: <AddArticlePage /> },
+          { path: "users/me", element: <UserPage /> },
         ],
       },
       {
