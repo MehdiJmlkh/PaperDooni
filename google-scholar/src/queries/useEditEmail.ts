@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import userService from "../services/userService";
+import userService, { EditEmailRequest } from "../services/userService";
 
 export const useEditEmail = () => {
-  return useMutation({
+  return useMutation<any, string, EditEmailRequest>({
     mutationFn: userService.editEmail,
   });
 };

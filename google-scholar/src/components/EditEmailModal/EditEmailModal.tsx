@@ -39,7 +39,7 @@ const EditEmailModal = ({ show, onClose }: Props) => {
       <Input
         {...register("newEmail")}
         placeholder="New Email"
-        error={errors.newEmail?.message}
+        error={editEmail.error || errors.newEmail?.message}
       />
       <Button
         disable={!canSubmit}

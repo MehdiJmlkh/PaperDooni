@@ -7,8 +7,12 @@ export interface SignUpRequest {
   phoneNumber: string;
 }
 
-interface EditEmailRequest {
+export interface EditEmailRequest {
   newEmail: string;
+}
+
+interface EditPhoneNumberRequest {
+  newPhoneNumber: string;
 }
 
 class UserService {
@@ -27,6 +31,15 @@ class UserService {
       .then((res) => res.data)
       .catch((err) => {
         throw err.response.data.email;
+      });
+  }
+
+  editPhoneNumber(request: EditPhoneNumberRequest) {
+    return apiClient
+      .post("/users/me/phone-number", request)
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err.response.data.phoneNumber;
       });
   }
 }
