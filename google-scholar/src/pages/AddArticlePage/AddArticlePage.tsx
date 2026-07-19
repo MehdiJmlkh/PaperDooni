@@ -59,7 +59,7 @@ const AddArticlePage = () => {
   return (
     <main className="add-article">
       <h1 className="add-article__heading">Add Article</h1>
-      <form className="form">
+      <form>
         <Input
           {...registerRequired("title")}
           className="add-article__input"
