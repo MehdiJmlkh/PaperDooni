@@ -32,7 +32,10 @@ const SignInPage = () => {
       <h1 className="form__heading">Sign in</h1>
       <Input {...register("username")} placeholder="Username" />
       <PasswordInput {...register("password")} placeholder="Password" />
-      <Button disable={!isValid}>Sign in</Button>
+      <div>
+        <p className="form__error">{login.error?.message}</p>
+        <Button disable={!isValid}>Sign in</Button>
+      </div>
       <div className="form__footer">
         <span>Not a member yet? </span>
         <Link to="/sign-up">Sign Up</Link>

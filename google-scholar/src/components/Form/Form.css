@@ -19,3 +19,8 @@
   color: #d3d3d3;
   text-align: center;
 }
+
+.form__error {
+  text-align: center;
+  color: #dc3545;
+}

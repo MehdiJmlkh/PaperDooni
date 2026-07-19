@@ -11,7 +11,7 @@ class AuthService {
       .post("/auth/login", request)
       .then((res) => res.data)
       .catch((err) => {
-        throw new Error(err.response.data);
+        throw new Error(err.response.data.error);
       });
   }
 }
