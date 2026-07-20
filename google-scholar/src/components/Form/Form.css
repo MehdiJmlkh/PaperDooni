@@ -24,3 +24,12 @@
   text-align: center;
   color: #dc3545;
 }
+
+@media (max-width: 680px) {
+  .form {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    padding: 4.5rem 10%;
+  }
+}
