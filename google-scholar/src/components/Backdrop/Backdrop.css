@@ -1,0 +1,14 @@
+.backdrop {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.backdrop--enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
