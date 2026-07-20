@@ -53,7 +53,9 @@ const EditModal = ({
 
       <Button
         disable={!canSubmit}
-        onClick={handleSubmit((data) => mutation.mutate(data[fieldName]))}
+        onClick={handleSubmit((data) =>
+          mutation.mutate(data[fieldName], { onSuccess: () => onClose() }),
+        )}
       >
         Submit
       </Button>
