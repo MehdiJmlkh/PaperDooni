@@ -32,6 +32,15 @@ class UserService {
       });
   }
 
+  getArtciles() {
+    return apiClient
+      .get("/users/me/articles")
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err.response.data;
+      });
+  }
+
   editEmail(newEmail: string) {
     return apiClient
       .post("/users/me/email", { newEmail })
