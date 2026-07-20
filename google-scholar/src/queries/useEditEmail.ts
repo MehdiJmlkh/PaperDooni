@@ -6,7 +6,7 @@ export const useEditEmail = () => {
   return useMutation<any, string, string>({
     mutationFn: userService.editEmail,
     onSuccess: (_, newEmail) => {
-      queryClient.setQueriesData<User>(["user"], (oldUser?: User) => {
+      queryClient.setQueryData<User>(["user"], (oldUser?: User) => {
         if (!oldUser) return oldUser;
 
         return { ...oldUser, email: newEmail };

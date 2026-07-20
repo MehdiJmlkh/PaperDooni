@@ -6,7 +6,7 @@ export const useEditPhoneNumber = () => {
   return useMutation<any, string, string>({
     mutationFn: userService.editPhoneNumber,
     onSuccess: (_, newPhoneNumber) => {
-      queryClient.setQueriesData(["user"], (oldUser?: User) => {
+      queryClient.setQueryData(["user"], (oldUser?: User) => {
         if (!oldUser) return oldUser;
 
         return { ...oldUser, phoneNumber: newPhoneNumber };
