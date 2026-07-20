@@ -77,18 +77,18 @@ public class UserController {
     @ExceptionHandler(EmailSameAsCurrentException.class)
     public ResponseEntity<Map<String, String>> handleEmailSameAsCurrentException() {
         return ResponseEntity.badRequest()
-                .body(Map.of("error", "New email must be different from current email"));
+                .body(Map.of("email", "Email is unchanged"));
     }
 
     @ExceptionHandler(PhoneNumberSameAsCurrentException.class)
     public ResponseEntity<Map<String, String>> handlePhoneNumberSameAsCurrentException() {
         return ResponseEntity.badRequest()
-                .body(Map.of("error", "New phone number must be different from current phone number"));
+                .body(Map.of("phoneNumber", "Phone number is unchanged"));
     }
 
     @ExceptionHandler(PasswordSameAsCurrentException.class)
     public ResponseEntity<Map<String, String>> handlePasswordSameAsCurrentException() {
         return ResponseEntity.badRequest()
-                .body(Map.of("error", "New password must be different from current password"));
+                .body(Map.of("password", "Password is unchanged"));
     }
 }
