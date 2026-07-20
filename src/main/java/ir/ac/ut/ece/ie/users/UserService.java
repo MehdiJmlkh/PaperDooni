@@ -47,14 +47,13 @@ public class UserService {
         var articles = authService.me()
                 .getArticles();
 
-//        return articles.stream()
-//                .map(article -> articleMapper.toSummaryDto(
-//                        article,
-//                        articleRepository.getCitedByCount(article.getId())
-//                    )
-//                )
-//                .toList();
-        return List.of();
+        return articles.stream()
+                .map(article -> articleMapper.toSummaryDto(
+                        article,
+                        articleRepository.getCitedByCount(article.getId())
+                    )
+                )
+                .toList();
     }
 
     public void changeEmail(ChangeEmailRequest request) {

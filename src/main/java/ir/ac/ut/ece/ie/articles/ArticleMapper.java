@@ -16,6 +16,18 @@ public class ArticleMapper {
         return articleDto;
     }
 
+    public ArticleSummaryDto toSummaryDto(Article article, Integer citedBy) {
+        var articleDto = new ArticleSummaryDto();
+
+        articleDto.setId(article.getId());
+        articleDto.setTitle(article.getTitle());
+        articleDto.setAbs(article.getAbs());
+        articleDto.setYear(article.getYear());
+        articleDto.setCitedBy(citedBy);
+
+        return articleDto;
+    }
+
     public ArticleDto toDto(Article article) {
         var articleDto = new ArticleDto();
         articleDto.setId(article.getId());
