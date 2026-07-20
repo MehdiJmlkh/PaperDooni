@@ -22,6 +22,11 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/me")
+    public UserDto me() {
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/me/articles")
     public List<ArticleSummaryDto> getUserArticles() {
         return userService.getUserArticles();

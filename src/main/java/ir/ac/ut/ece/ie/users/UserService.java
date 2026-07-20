@@ -98,4 +98,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
+
+    public UserDto getCurrentUser() {
+        var user = authService.me();
+        return userMapper.toDto(user);
+    }
 }

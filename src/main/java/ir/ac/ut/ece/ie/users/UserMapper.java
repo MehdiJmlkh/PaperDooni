@@ -7,4 +7,6 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     User toEntity(SignUpRequest request);
+
+    UserDto toDto(User user);
 }
