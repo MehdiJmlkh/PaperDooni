@@ -32,6 +32,8 @@ const EditModal = ({
     register,
     handleSubmit,
     watch,
+    reset,
+    clearErrors,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -43,8 +45,23 @@ const EditModal = ({
 
   const canSubmit = typeof value === "string" && value.trim() !== "";
 
+  const clear = () => {
+    reset({
+      [fieldName]: "",
+    });
+    clearErrors(fieldName);
+    mutation.reset();
+  };
+
   return (
-    <Modal title={title} show={show} onClose={onClose}>
+    <Modal
+      title={title}
+      show={show}
+      onClose={() => {
+        onClose();
+        clear();
+      }}
+    >
       <Input
         {...register(fieldName)}
         placeholder={placeholder}
@@ -54,7 +71,12 @@ const EditModal = ({
       <Button
         disable={!canSubmit}
         onClick={handleSubmit((data) =>
-          mutation.mutate(data[fieldName], { onSuccess: () => onClose() }),
+          mutation.mutate(data[fieldName], {
+            onSuccess: () => {
+              onClose();
+              clear();
+            },
+          }),
         )}
       >
         Submit
