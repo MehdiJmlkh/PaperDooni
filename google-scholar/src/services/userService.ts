@@ -7,18 +7,25 @@ export interface SignUpRequest {
   phoneNumber: string;
 }
 
-export interface EditEmailRequest {
-  newEmail: string;
-}
-
-interface EditPhoneNumberRequest {
-  newPhoneNumber: string;
+export interface User {
+  username: string;
+  email: string;
+  phoneNumber: string;
 }
 
 class UserService {
   signUp(request: SignUpRequest) {
     return apiClient
       .post("/users", request)
+      .then((res) => res.data)
+      .catch((err) => {
+        throw err.response.data;
+      });
+  }
+
+  me() {
+    return apiClient
+      .get("/users/me")
       .then((res) => res.data)
       .catch((err) => {
         throw err.response.data;
