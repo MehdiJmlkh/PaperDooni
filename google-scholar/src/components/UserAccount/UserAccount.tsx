@@ -9,6 +9,7 @@ import EditEmailModal from "../EditEmailModal";
 import EditPhoneNumberModal from "../EditPhoneNumberModal";
 import EditPasswordModal from "../EditPasswordModal";
 import { useState } from "react";
+import { useCurrentUser } from "../../queries/useCurrentUser";
 
 interface Props {
   className?: string;
@@ -20,20 +21,22 @@ const UserAccount = ({ className }: Props) => {
   const [editPhoneNumber, setEditPhoneNumber] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
 
+  const { data: user } = useCurrentUser();
+
   return (
     <>
       <Card className={`user-account ${className}`}>
         <div>
           <HiOutlineUserCircle className="user-account__icon" />
-          <span>Username</span>
+          <span>{user?.username}</span>
         </div>
         <div>
           <LuMail className="user-account__icon" />
-          <span>user@domain.com</span>
+          <span>{user?.email}</span>
         </div>
         <div>
           <LuPhone className="user-account__icon" />
-          <span>09178313266</span>
+          <span>{user?.phoneNumber}</span>
         </div>
         <Button className="logout-btn" onClick={() => logout.mutate()}>
           Logout
