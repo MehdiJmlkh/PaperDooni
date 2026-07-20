@@ -1,13 +1,14 @@
-import Card from "../../components/Card"
-import UserAccount from "../../components/UserAccount"
-import "./UserPage.css"
+import UserAccount from "../../components/UserAccount";
+import UserArticlesBlock from "../../components/UserArticlesBlock";
+import "./UserPage.css";
 
 const UserPage = () => {
   return (
     <div>
-        <UserAccount className="user-details"/>
+      <UserAccount className="user-details" />
+      <UserArticlesBlock />
     </div>
-  )
-}
+  );
+};
 
-export default UserPage
+export default UserPage;

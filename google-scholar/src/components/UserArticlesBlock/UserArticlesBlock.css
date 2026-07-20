@@ -1,0 +1,11 @@
+.user-articles__heading {
+  align-items: center;
+  column-gap: 1.5rem;
+  display: flex;
+  font-size: 4rem;
+  margin-top: 6rem;
+}
+
+.user-articles__title {
+  font-size: 3rem;
+}
