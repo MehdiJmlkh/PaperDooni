@@ -8,6 +8,7 @@ import SignInPage from "./pages/SignInPage";
 import AuthLayout from "./pages/AuthLayout/AuthLayout";
 import SignUpPage from "./pages/SignUpPage";
 import UserPage from "./pages/UserPage";
+import PrivateRoutes from "./pages/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,14 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <HomePage /> },
           { path: "articles", element: <HomePage /> },
-          { path: "articles/:id", element: <ArticlePage /> },
-          { path: "articles/new", element: <AddArticlePage /> },
-          { path: "users/me", element: <UserPage /> },
+          {
+            element: <PrivateRoutes />,
+            children: [
+              { path: "articles/:id", element: <ArticlePage /> },
+              { path: "articles/new", element: <AddArticlePage /> },
+              { path: "users/me", element: <UserPage /> },
+            ],
+          },
         ],
       },
       {
