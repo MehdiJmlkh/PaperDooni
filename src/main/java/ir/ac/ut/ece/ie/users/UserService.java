@@ -5,6 +5,8 @@ import ir.ac.ut.ece.ie.articles.ArticleRepository;
 import ir.ac.ut.ece.ie.articles.ArticleSummaryDto;
 import ir.ac.ut.ece.ie.auth.AuthService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -99,7 +101,17 @@ public class UserService {
     }
 
     public UserDto getCurrentUser() {
-        var user = authService.me();
-        return userMapper.toDto(user);
+        var authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            return null;
+        } else {
+
+            var userId = (Long) authentication.getPrincipal();
+            var user = userRepository.findById(userId).orElseThrow();
+
+            return userMapper.toDto(user);
+        }
     }
 }

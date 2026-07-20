@@ -40,6 +40,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                     .requestMatchers(HttpMethod.POST,"/auth/refresh").permitAll()
                     .requestMatchers(HttpMethod.POST,"/users").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/users/me").permitAll()
                     .requestMatchers(HttpMethod.GET, "/articles").permitAll()
                     .anyRequest().authenticated()
             )
