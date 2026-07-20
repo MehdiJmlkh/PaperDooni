@@ -10,6 +10,7 @@ import EditPhoneNumberModal from "../EditPhoneNumberModal";
 import EditPasswordModal from "../EditPasswordModal";
 import { useState } from "react";
 import { useCurrentUser } from "../../queries/useCurrentUser";
+import Backdrop from "../Backdrop";
 
 interface Props {
   className?: string;
@@ -25,6 +26,7 @@ const UserAccount = ({ className }: Props) => {
 
   return (
     <>
+      <Backdrop enabled={editEmail || editPhoneNumber || editPassword} />
       <Card className={`user-account ${className}`}>
         <div>
           <HiOutlineUserCircle className="user-account__icon" />
