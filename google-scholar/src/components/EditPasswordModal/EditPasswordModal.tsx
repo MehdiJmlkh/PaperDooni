@@ -28,6 +28,7 @@ const EditPasswordModal = ({ show, onClose }: Props) => {
       placeholder="New Password"
       schema={schema}
       mutation={useEditPassword()}
+      password={true}
     />
   );
 };

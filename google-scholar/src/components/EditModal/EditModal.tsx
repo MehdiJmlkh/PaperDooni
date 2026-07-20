@@ -6,6 +6,7 @@ import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
 import "./EditModal.css";
+import PasswordInput from "../PasswordInput";
 
 interface Props {
   show: boolean;
@@ -15,6 +16,7 @@ interface Props {
   placeholder: string;
   schema: ZodSchema<Record<string, string>>;
   mutation: UseMutationResult<any, string, string, unknown>;
+  password?: boolean;
 }
 
 type FormData = Record<string, string>;
@@ -27,6 +29,7 @@ const EditModal = ({
   placeholder,
   schema,
   mutation,
+  password = false,
 }: Props) => {
   const {
     register,
@@ -62,11 +65,19 @@ const EditModal = ({
         clear();
       }}
     >
-      <Input
-        {...register(fieldName)}
-        placeholder={placeholder}
-        error={mutation.error || errors[fieldName]?.message}
-      />
+      {password ? (
+        <PasswordInput
+          {...register(fieldName)}
+          placeholder={placeholder}
+          error={mutation.error || errors[fieldName]?.message}
+        />
+      ) : (
+        <Input
+          {...register(fieldName)}
+          placeholder={placeholder}
+          error={mutation.error || errors[fieldName]?.message}
+        />
+      )}
 
       <Button
         disable={!canSubmit}
