@@ -1,0 +1,66 @@
+package ir.ac.ut.ece.ie.articles;
+
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("/articles")
+public class ArticleController {
+    private final ArticleService articleService;
+
+    @GetMapping
+    public Page<ArticleSummaryDto> getArticles(
+            @RequestParam(value = "searchText", required = false, defaultValue = "") String searchText,
+            @RequestParam(value = "page") Integer page,
+            @RequestParam(value = "size") Integer size) {
+        return articleService.getArticles(searchText, page, size);
+    }
+
+    @GetMapping("/{id}")
+    public ArticleDto getArticle(@PathVariable("id") Long id,
+                                 UriComponentsBuilder uriBuilder) {
+        var articleDto = articleService.getArticle(id);
+        articleDto.getCitations().forEach(citation ->
+                        citation.setLocation(uriBuilder.cloneBuilder(), "/articles/{id}"));
+        return articleDto;
+    }
+
+    @PostMapping
+    public ResponseEntity<ArticleDto> addArticle(
+            @RequestBody AddArticleRequest request,
+            UriComponentsBuilder uriBuilder
+    ) {
+        var articleDto = articleService.addArticle(request);
+
+        String articlePath = "/articles/{id}";
+        articleDto.getCitations().forEach(citationDto ->
+                citationDto.setLocation(uriBuilder.cloneBuilder(), articlePath));
+
+        var uri = uriBuilder.path(articlePath).buildAndExpand(articleDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(articleDto);
+    }
+
+    @ExceptionHandler(ArticleNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleArticleNotFoundException() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorDto("There is no article with this id."));
+    }
+
+    @ExceptionHandler(CitationNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleCitationNotFoundException() {
+        return ResponseEntity.badRequest()
+                .body(new ErrorDto("Citation ID(s) not found."));
+    }
+
+    @ExceptionHandler(TitleAlreadyExistsException.class)
+    public ResponseEntity<ErrorDto> handleTitleAlreadyExistsException() {
+        return ResponseEntity.badRequest()
+                .body(new ErrorDto("Article already exists."));
+    }
+}
