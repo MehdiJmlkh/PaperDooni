@@ -1,6 +1,9 @@
 server:
   servlet:
     context-path: /api
+app:
+  cors:
+    allowed-origin: "http://localhost:5173"
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/myscholar?createDatabaseIfNotExist=true

@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.ie.config;
 
 import jakarta.annotation.Nonnull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -8,13 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig {
+    @Value("${app.cors.allowed-origin}")
+    private String allowedOrigin;
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@Nonnull CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
+                        .allowedOrigins(allowedOrigin)
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true);
