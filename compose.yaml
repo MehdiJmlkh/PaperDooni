@@ -18,6 +18,9 @@ services:
     secrets:
       - db_root_password
       - jwt_secret
+    depends_on:
+      db:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/api/actuator/health"]
       interval: 5s
@@ -36,6 +39,12 @@ services:
       - mysql_data:/var/lib/mysql
     secrets:
       - db_root_password 
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=$$(cat /run/secrets/db_root_password)"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 secrets:
   db_root_password:
