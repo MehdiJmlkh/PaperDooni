@@ -15,8 +15,9 @@ services:
       SPRING_JWT_SECRET: ${JWT_SECRET}
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/google_scholar
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       APP_CORS_ALLOWED_ORIGIN: http://localhost
+    secrets:
+      - db_root_password
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/api/actuator/health"]
       interval: 5s
@@ -30,9 +31,15 @@ services:
       - "3307:3306"
     environment:
       MYSQL_DATABASE: google_scholar
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD_FILE: run/secrets/db_root_password
     volumes:
       - mysql_data:/var/lib/mysql
+    secrets:
+      - db_root_password 
+
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password.txt
 
 volumes:
   mysql_data:

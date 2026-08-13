@@ -5,10 +5,12 @@ app:
   cors:
     allowed-origin: "http://localhost:5173"
 spring:
+  config:
+    import: "optional:configtree:/run/secrets/"
   datasource:
     url: jdbc:mysql://localhost:3306/myscholar?createDatabaseIfNotExist=true
     username: root
-    password: NewPassword123!
+    password: ${db_root_password}
   jpa:
     show-sql: true
   jwt:
