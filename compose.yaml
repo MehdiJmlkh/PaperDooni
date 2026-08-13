@@ -12,12 +12,12 @@ services:
     # ports:
       # - "8080:8080"
     environment:
-      SPRING_JWT_SECRET: ${JWT_SECRET}
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/google_scholar
       SPRING_DATASOURCE_USERNAME: root
       APP_CORS_ALLOWED_ORIGIN: http://localhost
     secrets:
       - db_root_password
+      - jwt_secret
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/api/actuator/health"]
       interval: 5s
@@ -40,6 +40,8 @@ services:
 secrets:
   db_root_password:
     file: ./secrets/db_root_password.txt
+  jwt_secret:
+    file: ./secrets/jwt_secret.txt
 
 volumes:
   mysql_data:
