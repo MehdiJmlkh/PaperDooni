@@ -3,7 +3,7 @@ import './Footer.css'
 const Footer = () => {
   return (
     <footer className="page-footer">
-      <span>Copyright &copy; 2026 - Google Scholar</span>
+      <span>Copyright &copy; 2026 - PaperDooni</span>
     </footer>
   )
 }
