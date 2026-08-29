@@ -2,7 +2,7 @@ import { useUserArticles } from "../../queries/useUserArticles";
 import ArticleCard from "../ArticleCard";
 import "./UserArticlesBlock.css";
 import { PiBooks } from "react-icons/pi";
-
+import NoResultIcon from "../NoResultIcon";
 
 const UserArticlesBlock = () => {
   const { data: articles } = useUserArticles();
@@ -13,9 +13,11 @@ const UserArticlesBlock = () => {
         <PiBooks />
         <h2 className="user-articles__title">My Articles</h2>
       </div>
-      {articles?.map((article) => (
-        <ArticleCard article={article} />
-      ))}
+      {articles?.length ? (
+        articles?.map((article) => <ArticleCard article={article} />)
+      ) : (
+        <NoResultIcon />
+      )}
     </>
   );
 };
