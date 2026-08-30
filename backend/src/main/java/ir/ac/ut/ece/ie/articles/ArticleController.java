@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -59,8 +59,8 @@ public class ArticleController {
     }
 
     @ExceptionHandler(TitleAlreadyExistsException.class)
-    public ResponseEntity<ErrorDto> handleTitleAlreadyExistsException() {
+    public ResponseEntity<Map<String, String>> handleTitleAlreadyExistsException() {
         return ResponseEntity.badRequest()
-                .body(new ErrorDto("Article already exists."));
+                .body(Map.of("title","Article already exists."));
     }
 }
