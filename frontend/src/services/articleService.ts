@@ -51,7 +51,7 @@ class ArticleService {
       .post("articles", article)
       .then((res) => res.data)
       .catch((err) => {
-        throw new Error(err.response.data.error);
+        throw err.response.data;
       });
   }
 }

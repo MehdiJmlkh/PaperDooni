@@ -38,7 +38,9 @@ const AddArticlePage = () => {
           setSelectedArticleIds([]);
         },
         onError: (error) => {
-          toast.error(error.message)
+          if (error.error) {
+            toast.info(error.error);
+          }
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -64,7 +66,7 @@ const AddArticlePage = () => {
           {...registerRequired("title")}
           className="add-article__input"
           placeholder="Title"
-          error={addArticle.error?.message}
+          error={addArticle.error?.title}
         />
         <Input
           {...registerRequired("year")}
