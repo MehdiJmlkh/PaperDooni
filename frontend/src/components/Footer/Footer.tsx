@@ -1,11 +1,11 @@
-import './Footer.css'
+import "./Footer.css";
 
 const Footer = () => {
   return (
     <footer className="page-footer">
-      <span>Copyright &copy; 2026 - PaperDooni</span>
+      <span>Copyright &copy; {new Date().getFullYear()} - PaperDooni</span>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
