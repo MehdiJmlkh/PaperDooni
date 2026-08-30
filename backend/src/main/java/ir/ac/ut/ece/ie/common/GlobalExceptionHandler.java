@@ -1,5 +1,7 @@
 package ir.ac.ut.ece.ie.common;
 
+import ir.ac.ut.ece.ie.articles.ErrorDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,5 +24,11 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(ProdProfileException.class)
+    public ResponseEntity<ErrorDto> ProdProfileException() {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ErrorDto("This action is unavailable in demo mode. Run PaperDooni locally to enable it"));
     }
 }

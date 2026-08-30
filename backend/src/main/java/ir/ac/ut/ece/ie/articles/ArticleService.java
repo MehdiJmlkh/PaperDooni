@@ -1,6 +1,8 @@
 package ir.ac.ut.ece.ie.articles;
 
 import ir.ac.ut.ece.ie.auth.AuthService;
+import ir.ac.ut.ece.ie.common.ProdProfileException;
+import ir.ac.ut.ece.ie.config.ProfileConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleMapper articleMapper;
     private final AuthService authService;
+    private final ProfileConfig profileConfig;
 
     public Page<ArticleSummaryDto> getArticles(String searchText, Integer pageNumber, Integer size) {
         var page = articleRepository.containsSearchText(searchText, PageRequest.of(pageNumber - 1, size));
@@ -54,7 +57,12 @@ public class ArticleService {
                                 .orElseThrow(CitationNotFoundException::new))
                 .forEach(article::addCitation);
 
-        articleRepository.save(article);
+        if (profileConfig.isDev()) {
+            articleRepository.save(article);
+        }
+        else {
+            throw new ProdProfileException();
+        }
 
         var articleDto = articleMapper.toDto(article);
         var citationDtoList = article.getCitations().stream()
