@@ -14,7 +14,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "mysql -h localhost -u root -p$$(cat /run/secrets/db_root_password) -e 'SELECT 1' miobook"
+          "mysql -h localhost -u root -p$$(cat /run/secrets/db_root_password) -e 'SELECT 1' paperdooni"
         ]
       interval: 5s
       timeout: 5s
